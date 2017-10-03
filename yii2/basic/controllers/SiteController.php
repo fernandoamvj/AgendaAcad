@@ -119,8 +119,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionCalendario()
     {
-        return $this->render('about');
+        return $this->render('calendario');
     }
+
 }
