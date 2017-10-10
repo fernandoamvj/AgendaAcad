@@ -1,6 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\helpers\Html;
+
 
 $this->title = 'AgendaAcad';
 ?>
@@ -12,11 +14,10 @@ $this->title = 'AgendaAcad';
 
         <p class="lead">Aqui voce poderá ver todos os seus compromissos e agendamentos do CEFET!</p>
 
-        <p><a class="btn btn-lg btn-success" href="/Projetos/AgendaAcad/yii2/basic/web/?r=site/login">Meu Calendário</a>
-
-        <a class="btn btn-lg btn-success" href="/Projetos/AgendaAcad/yii2/basic/web/?r=usuario/create">Cadastrar</a>
-
+            <?= Html::a('Meu Calendário', ['login'], ['class' => 'btn btn-lg btn-success']) ?>
+            <?= Html::a('Cadastrar', ['usuario/create'], ['class' => 'btn btn-lg btn-success']) ?>
         </p>
+
     </div>
 
     <div class="body-content">

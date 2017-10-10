@@ -121,6 +121,6 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($senha)
     {
-        return $this->senha === md5($senha);
+        return $this->senha === $senha;
     }
 }

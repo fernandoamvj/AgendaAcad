@@ -77,7 +77,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->render('calendario');
         }
         return $this->render('login', [
             'model' => $model,
@@ -123,5 +123,8 @@ class SiteController extends Controller
     {
         return $this->render('calendario');
     }
+
+
+
 
 }
