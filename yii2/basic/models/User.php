@@ -2,38 +2,51 @@
 
 namespace app\models;
 
+use app\models\UsuarioSearch as UsuarioSearch;
+
+
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
-    public $id;
+    public $codigo;
+    public $nome;
     public $username;
-    public $password;
+    public $email;
+    public $tipo;
+    public $senha;
     public $authKey;
     public $accessToken;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+//    private static $users = [
+//        '100' => [
+//            'id' => '100',
+//            'username' => 'admin',
+//            'password' => 'admin',
+//            'authKey' => 'test100key',
+//            'accessToken' => '100-token',
+//        ],
+//        '101' => [
+//            'id' => '101',
+//            'username' => 'demo',
+//            'password' => 'demo',
+//            'authKey' => 'test101key',
+//            'accessToken' => '101-token',
+//        ],
+//    ];
 
 
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function findIdentity($codigo)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        $user = UsuarioSearch::find()->where(['codigo' => $codigo])->one();
+  
+        if($user){
+            return new static($user);
+        }
+  
+        return null;
     }
 
     /**
@@ -41,12 +54,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
+/*        foreach (self::$users as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
             }
         }
-
+*/
         return null;
     }
 
@@ -58,10 +71,17 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
+ /*
         foreach (self::$users as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
+        }
+*/
+        $user = UsuarioSearch::find()->where(['email' => $username])->one();
+
+        if($user){
+            return new static($user);
         }
 
         return null;
@@ -72,7 +92,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->codigo;
     }
 
     /**
@@ -80,7 +100,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        //return $this->authKey;
+        return null;
     }
 
     /**
@@ -88,7 +109,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        // return $this->authKey === $authKey;
+        return null;
     }
 
     /**
@@ -97,8 +119,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword($password)
+    public function validatePassword($senha)
     {
-        return $this->password === $password;
+        return $this->senha === md5($senha);
     }
 }
