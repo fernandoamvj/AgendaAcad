@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\DisciplinaSearch */
+/* @var $searchModel app\models\EventoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Disciplinas';
+$this->title = 'Eventos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="disciplina-index">
+<div class="evento-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Disciplina', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,12 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idDisciplina',
-            'nome',
-            'id_professor',
-            'id_monitor',
-            'data_fechamento',
-            // 'semestre',
+            'id_evento',
+            'data_hora',
+            'descrição',
+            'id_disciplina',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

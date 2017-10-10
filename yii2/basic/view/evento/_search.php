@@ -4,28 +4,24 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DisciplinaSearch */
+/* @var $model app\models\EventoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="disciplina-search">
+<div class="evento-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idDisciplina') ?>
+    <?= $form->field($model, 'id_evento') ?>
 
-    <?= $form->field($model, 'nome') ?>
+    <?= $form->field($model, 'data_hora') ?>
 
-    <?= $form->field($model, 'id_professor') ?>
+    <?= $form->field($model, 'descrição') ?>
 
-    <?= $form->field($model, 'id_monitor') ?>
-
-    <?= $form->field($model, 'data_fechamento') ?>
-
-    <?php // echo $form->field($model, 'semestre') ?>
+    <?= $form->field($model, 'id_disciplina') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

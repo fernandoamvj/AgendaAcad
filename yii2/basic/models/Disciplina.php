@@ -11,6 +11,8 @@ use Yii;
  * @property string $nome
  * @property integer $id_professor
  * @property integer $id_monitor
+ * @property string $data_fechamento
+ * @property string $semestre
  *
  * @property Usuario $idMonitor
  * @property Usuario $idProfessor
@@ -35,7 +37,9 @@ class Disciplina extends \yii\db\ActiveRecord
         return [
             [['idDisciplina', 'nome', 'id_professor', 'id_monitor'], 'required'],
             [['idDisciplina', 'id_professor', 'id_monitor'], 'integer'],
+            [['data_fechamento'], 'safe'],
             [['nome'], 'string', 'max' => 45],
+            [['semestre'], 'string', 'max' => 10],
             [['id_monitor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_monitor' => 'codigo']],
             [['id_professor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_professor' => 'codigo']],
         ];
@@ -51,6 +55,8 @@ class Disciplina extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'id_professor' => 'Id Professor',
             'id_monitor' => 'Id Monitor',
+            'data_fechamento' => 'Data Fechamento',
+            'semestre' => 'Semestre',
         ];
     }
 
