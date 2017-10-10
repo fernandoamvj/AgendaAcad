@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TipoUsuario;
+use app\models\Tipousuario;
 
 /**
- * TipoUsuarioSearch represents the model behind the search form about `app\models\TipoUsuario`.
+ * TipousuarioSearch represents the model behind the search form about `app\models\Tipousuario`.
  */
-class TipoUsuarioSearch extends TipoUsuario
+class TipousuarioSearch extends Tipousuario
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class TipoUsuarioSearch extends TipoUsuario
      */
     public function search($params)
     {
-        $query = TipoUsuario::find();
+        $query = Tipousuario::find();
 
         // add conditions that should always apply here
 

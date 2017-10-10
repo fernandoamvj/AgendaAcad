@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Usuario;
 
 /**
- * UsuariosSearch represents the model behind the search form about `app\models\Usuario`.
+ * UsuarioSearch represents the model behind the search form about `app\models\Usuario`.
  */
-class UsuariosSearch extends Usuario
+class UsuarioSearch extends Usuario
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class UsuariosSearch extends Usuario
     public function rules()
     {
         return [
+            [['codigo', 'tipo'], 'integer'],
             [['nome', 'email', 'senha'], 'safe'],
-            [['tipo'], 'integer'],
         ];
     }
 
@@ -59,6 +59,7 @@ class UsuariosSearch extends Usuario
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'codigo' => $this->codigo,
             'tipo' => $this->tipo,
         ]);
 

@@ -2,18 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\TipoUsuarioSearch;
 use Yii;
 use app\models\Usuario;
-use app\models\UsuariosSearch;
+use app\models\UsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsuariosController implements the CRUD actions for Usuario model.
+ * UsuarioController implements the CRUD actions for Usuario model.
  */
-class UsuariosController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * @inheritdoc
@@ -36,7 +35,7 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UsuariosSearch();
+        $searchModel = new UsuarioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,14 +46,14 @@ class UsuariosController extends Controller
 
     /**
      * Displays a single Usuario model.
-     * @param string $nome
+     * @param integer $codigo
      * @param string $email
      * @return mixed
      */
-    public function actionView($nome, $email)
+    public function actionView($codigo, $email)
     {
         return $this->render('view', [
-            'model' => $this->findModel($nome, $email),
+            'model' => $this->findModel($codigo, $email),
         ]);
     }
 
@@ -66,9 +65,9 @@ class UsuariosController extends Controller
     public function actionCreate()
     {
         $model = new Usuario();
-        $tiposUsuario = new TipoUsuarioSearch();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'nome' => $model->nome, 'email' => $model->email]);
+            return $this->redirect(['view', 'codigo' => $model->codigo, 'email' => $model->email]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -79,16 +78,16 @@ class UsuariosController extends Controller
     /**
      * Updates an existing Usuario model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $nome
+     * @param integer $codigo
      * @param string $email
      * @return mixed
      */
-    public function actionUpdate($nome, $email)
+    public function actionUpdate($codigo, $email)
     {
-        $model = $this->findModel($nome, $email);
+        $model = $this->findModel($codigo, $email);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'nome' => $model->nome, 'email' => $model->email]);
+            return $this->redirect(['view', 'codigo' => $model->codigo, 'email' => $model->email]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -99,13 +98,13 @@ class UsuariosController extends Controller
     /**
      * Deletes an existing Usuario model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $nome
+     * @param integer $codigo
      * @param string $email
      * @return mixed
      */
-    public function actionDelete($nome, $email)
+    public function actionDelete($codigo, $email)
     {
-        $this->findModel($nome, $email)->delete();
+        $this->findModel($codigo, $email)->delete();
 
         return $this->redirect(['index']);
     }
@@ -113,14 +112,14 @@ class UsuariosController extends Controller
     /**
      * Finds the Usuario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $nome
+     * @param integer $codigo
      * @param string $email
      * @return Usuario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($nome, $email)
+    protected function findModel($codigo, $email)
     {
-        if (($model = Usuario::findOne(['nome' => $nome, 'email' => $email])) !== null) {
+        if (($model = Usuario::findOne(['codigo' => $codigo, 'email' => $email])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

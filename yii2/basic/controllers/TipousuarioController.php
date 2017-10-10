@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\TipoUsuario;
-use app\models\TipoUsuarioSearch;
+use app\models\Tipousuario;
+use app\models\TipousuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TipousuarioController implements the CRUD actions for TipoUsuario model.
+ * TipousuarioController implements the CRUD actions for Tipousuario model.
  */
 class TipousuarioController extends Controller
 {
@@ -30,12 +30,12 @@ class TipousuarioController extends Controller
     }
 
     /**
-     * Lists all TipoUsuario models.
+     * Lists all Tipousuario models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TipoUsuarioSearch();
+        $searchModel = new TipousuarioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class TipousuarioController extends Controller
     }
 
     /**
-     * Displays a single TipoUsuario model.
+     * Displays a single Tipousuario model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class TipousuarioController extends Controller
     }
 
     /**
-     * Creates a new TipoUsuario model.
+     * Creates a new Tipousuario model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new TipoUsuario();
+        $model = new Tipousuario();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_tipo_usuario]);
@@ -75,7 +75,7 @@ class TipousuarioController extends Controller
     }
 
     /**
-     * Updates an existing TipoUsuario model.
+     * Updates an existing Tipousuario model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class TipousuarioController extends Controller
     }
 
     /**
-     * Deletes an existing TipoUsuario model.
+     * Deletes an existing Tipousuario model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class TipousuarioController extends Controller
     }
 
     /**
-     * Finds the TipoUsuario model based on its primary key value.
+     * Finds the Tipousuario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return TipoUsuario the loaded model
+     * @return Tipousuario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TipoUsuario::findOne($id)) !== null) {
+        if (($model = Tipousuario::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
