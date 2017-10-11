@@ -77,7 +77,10 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->render('calendario');
+          if(Yii::$app->user->identity->tipo==1) {
+              return $this->render('calendario');
+          }
+            return $this->render('calendario2');
         }
         return $this->render('login', [
             'model' => $model,
