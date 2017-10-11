@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Usuario;
 use app\models\UsuarioSearch;
+use app\models\TipousuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -69,8 +70,11 @@ class UsuarioController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'codigo' => $model->codigo, 'email' => $model->email]);
         } else {
+            $searchModel = new TipousuarioSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             return $this->render('create', [
                 'model' => $model,
+                'tiposUsuarios' =>$dataProvider
             ]);
         }
     }
