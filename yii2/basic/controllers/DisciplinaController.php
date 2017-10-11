@@ -113,6 +113,12 @@ class DisciplinaController extends Controller
      * @return Disciplina the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    public function actionInscrever()
+    {
+        return $this->render('inscrever');
+    }
+
     protected function findModel($id)
     {
         if (($model = Disciplina::findOne($id)) !== null) {
