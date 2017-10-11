@@ -19,7 +19,7 @@ class EventoSearch extends Evento
     {
         return [
             [['id_evento', 'id_disciplina'], 'integer'],
-            [['data_hora', 'descricao'], 'safe'],
+            [['data_hora', 'descricao', 'nome', 'tipo'], 'safe'],
         ];
     }
 
@@ -64,7 +64,9 @@ class EventoSearch extends Evento
             'id_disciplina' => $this->id_disciplina,
         ]);
 
-        $query->andFilterWhere(['like', 'descricao', $this->descricao]);
+        $query->andFilterWhere(['like', 'descricao', $this->descricao])
+            ->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'tipo', $this->tipo]);
 
         return $dataProvider;
     }

@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             'id_professor',
             'id_monitor',
-            'data_fechamento',
-            // 'semestre',
+            'datainicio',
+            // 'datafim',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

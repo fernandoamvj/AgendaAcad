@@ -23,9 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_monitor') ?>
 
-    <?= $form->field($model, 'data_fechamento') ?>
+    <?= $form->field($model, 'datainicio') ?>
 
-    <?php // echo $form->field($model, 'semestre') ?>
+    <?php // echo $form->field($model, 'datafim') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -12,17 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idDisciplina')->textInput() ?>
-
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'id_professor')->textInput() ?>
 
     <?= $form->field($model, 'id_monitor')->textInput() ?>
 
-    <?= $form->field($model, 'data_fechamento')->textInput() ?>
+    <?= $form->field($model, 'datainicio')->textInput(['type'=>'date']) ?>
 
-    <?= $form->field($model, 'semestre')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'datafim')->textInput(['type'=>'date']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

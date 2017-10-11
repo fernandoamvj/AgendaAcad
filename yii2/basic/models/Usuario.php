@@ -39,7 +39,7 @@ class Usuario extends \yii\db\ActiveRecord
             [['nome', 'email', 'tipo', 'senha'], 'required'],
             [['codigo', 'tipo'], 'integer'],
             [['nome'], 'string', 'max' => 50],
-            [['email'], 'string', 'max' => 45],
+            [['email'], 'email'],
             [['senha'], 'string', 'max' => 32],
             [['tipo'], 'exist', 'skipOnError' => true, 'targetClass' => Tipousuario::className(), 'targetAttribute' => ['tipo' => 'id_tipo_usuario']],
         ];

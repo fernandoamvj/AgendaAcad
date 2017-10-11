@@ -37,19 +37,28 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            Yii::$app->user->isGuest ? (
+            ['label' => 'Home', 'url' => ['/site/index']]
+            ) : (
+                Yii::$app->user->identity->tipo==2 ? (
+                    ['label' => 'Home', 'url' => ['site/calendario']]
+            ):(
+                    ['label' => 'Home', 'url' => ['site/calendario2']]
+            )),
+           // ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
+                //. Html::a('Menu', ['site/calendario'], ['class' => 'navbar-nav '])
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->nome . ')',
-                    ['class' => 'btn btn-link logout']
-                )
+                    ['class' => 'btn btn-link logout'])
                 . Html::endForm()
+
                 . '</li>'
             )
         ],
@@ -67,9 +76,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Agenda Acad <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+       <!-- <p class="pull-right"><?= Yii::powered() ?></p>-->
     </div>
 </footer>
 

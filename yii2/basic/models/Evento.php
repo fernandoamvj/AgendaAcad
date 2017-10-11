@@ -9,8 +9,10 @@ use Yii;
  *
  * @property integer $id_evento
  * @property string $data_hora
- * @property integer $id_disciplina
  * @property string $descricao
+ * @property integer $id_disciplina
+ * @property string $nome
+ * @property string $tipo
  *
  * @property Comentario[] $comentarios
  * @property Disciplina $idDisciplina
@@ -33,10 +35,11 @@ class Evento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_evento', 'data_hora'], 'required'],
-            [['id_evento', 'id_disciplina'], 'integer'],
+            [['data_hora', 'descricao', 'nome', 'tipo'], 'required'],
             [['data_hora'], 'safe'],
+            [['id_disciplina'], 'integer'],
             [['descricao'], 'string', 'max' => 300],
+            [['nome', 'tipo'], 'string', 'max' => 45],
             [['id_disciplina'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['id_disciplina' => 'idDisciplina']],
         ];
     }
@@ -49,8 +52,10 @@ class Evento extends \yii\db\ActiveRecord
         return [
             'id_evento' => 'Id Evento',
             'data_hora' => 'Data Hora',
-            'id_disciplina' => 'Id Disciplina',
             'descricao' => 'Descricao',
+            'id_disciplina' => 'Id Disciplina',
+            'nome' => 'Nome',
+            'tipo' => 'Tipo',
         ];
     }
 
