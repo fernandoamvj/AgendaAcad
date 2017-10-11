@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Html;
-$this->title = 'Calendario';
+$this->title = 'Calendario2';
 ?>
 
 <h1>Menu</h1>
@@ -20,7 +20,7 @@ $this->title = 'Calendario';
     <p>
     <h2>Disciplina </h2>
     <br>
-    <?= Html::a('Inscrever Disciplina', [''], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Inscrever Disciplina', ['disciplina/inscrever'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 

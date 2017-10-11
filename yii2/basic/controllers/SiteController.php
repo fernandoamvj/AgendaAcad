@@ -78,8 +78,8 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
           if(Yii::$app->user->identity->tipo==1) {
-              return $this->render('calendario');
-          }
+                return $this->render('calendario');
+            }
             return $this->render('calendario2');
         }
         return $this->render('login', [
@@ -125,6 +125,11 @@ class SiteController extends Controller
     public function actionCalendario()
     {
         return $this->render('calendario');
+    }
+
+    public function actionCalendario2()
+    {
+        return $this->render('calendario2');
     }
 
 
