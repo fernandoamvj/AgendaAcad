@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id_evento
  * @property string $data_hora
- * @property string $descrição
+ * @property string $descricao
  * @property integer $id_disciplina
  *
  * @property Comentario[] $comentarios
@@ -33,10 +33,10 @@ class Evento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_evento', 'data_hora', 'descrição'], 'required'],
+            [['id_evento', 'data_hora', 'descricao'], 'required'],
             [['id_evento', 'id_disciplina'], 'integer'],
             [['data_hora'], 'safe'],
-            [['descrição'], 'string', 'max' => 300],
+            [['descricao'], 'string', 'max' => 300],
             [['id_disciplina'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['id_disciplina' => 'idDisciplina']],
         ];
     }
@@ -48,8 +48,8 @@ class Evento extends \yii\db\ActiveRecord
     {
         return [
             'id_evento' => 'Id Evento',
-            'data_hora' => 'Data Hora',
-            'descrição' => 'Descrição',
+            'data_hora' => 'Dia e Hora',
+            'descricao' => 'Descrição',
             'id_disciplina' => 'Id Disciplina',
         ];
     }
