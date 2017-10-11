@@ -9,37 +9,18 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
     public $codigo;
     public $nome;
-    public $username;
     public $email;
     public $tipo;
     public $senha;
     public $authKey;
     public $accessToken;
 
-//    private static $users = [
-//        '100' => [
-//            'id' => '100',
-//            'username' => 'admin',
-//            'password' => 'admin',
-//            'authKey' => 'test100key',
-//            'accessToken' => '100-token',
-//        ],
-//        '101' => [
-//            'id' => '101',
-//            'username' => 'demo',
-//            'password' => 'demo',
-//            'authKey' => 'test101key',
-//            'accessToken' => '101-token',
-//        ],
-//    ];
-
-
     /**
      * @inheritdoc
      */
     public static function findIdentity($codigo)
     {
-        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+
         $user = UsuarioSearch::find()->where(['codigo' => $codigo])->one();
   
         if($user){
@@ -54,31 +35,19 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-/*        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-*/
         return null;
     }
 
     /**
-     * Finds user by username
+     * Finds user by email
      *
-     * @param string $username
+     * @param string $email
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByEmail($email)
     {
- /*
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-*/
-        $user = UsuarioSearch::find()->where(['email' => $username])->one();
+ 
+        $user = UsuarioSearch::find()->where(['email' => $email])->one();
 
         if($user){
             return new static($user);
