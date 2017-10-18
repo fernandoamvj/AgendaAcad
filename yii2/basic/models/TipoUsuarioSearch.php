@@ -10,7 +10,7 @@ use app\models\TipoUsuario;
 /**
  * TipousuarioSearch represents the model behind the search form about `app\models\Tipousuario`.
  */
-class TipoUsuarioSearch extends Tipousuario
+class TipoUsuarioSearch extends TipoUsuario
 {
     /**
      * @inheritdoc
