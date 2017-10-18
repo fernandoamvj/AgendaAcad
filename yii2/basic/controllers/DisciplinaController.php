@@ -64,7 +64,7 @@ class DisciplinaController extends Controller
     public function actionCreate()
     {
         $model = new Disciplina();
-        // deu bom ---> $model->id_professor = Yii::$app->user->identity->codigo;
+         $model->id_professor = Yii::$app->user->identity->codigo;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             return $this->redirect(['view', 'id' => $model->idDisciplina]);

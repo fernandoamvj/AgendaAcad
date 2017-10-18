@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_professor')->textInput() ?>
-
     <?= $form->field($model, 'id_monitor')->textInput() ?>
 
     <?= $form->field($model, 'datainicio')->textInput(['type'=>'date']) ?>
