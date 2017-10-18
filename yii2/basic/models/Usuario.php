@@ -41,7 +41,7 @@ class Usuario extends \yii\db\ActiveRecord
             [['nome'], 'string', 'max' => 50],
             [['email'], 'email'],
             [['senha'], 'string', 'max' => 32],
-            [['tipo'], 'exist', 'skipOnError' => true, 'targetClass' => Tipousuario::className(), 'targetAttribute' => ['tipo' => 'id_tipo_usuario']],
+            [['tipo'], 'exist', 'skipOnError' => true, 'targetClass' => TipoUsuario::className(), 'targetAttribute' => ['tipo' => 'id_tipo_usuario']],
         ];
     }
 
@@ -96,7 +96,7 @@ class Usuario extends \yii\db\ActiveRecord
      */
     public function getTipo0()
     {
-        return $this->hasOne(Tipousuario::className(), ['id_tipo_usuario' => 'tipo']);
+        return $this->hasOne(TipoUsuario::className(), ['id_tipo_usuario' => 'tipo']);
     }
 
     /**
@@ -104,6 +104,6 @@ class Usuario extends \yii\db\ActiveRecord
      */
     public function getUsuarioeventos()
     {
-        return $this->hasMany(Usuarioevento::className(), ['id_usuario' => 'codigo']);
+        return $this->hasMany(UsuarioEvento::className(), ['id_usuario' => 'codigo']);
     }
 }

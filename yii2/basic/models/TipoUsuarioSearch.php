@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Tipousuario;
+use app\models\TipoUsuario;
 
 /**
  * TipousuarioSearch represents the model behind the search form about `app\models\Tipousuario`.
  */
-class TipousuarioSearch extends Tipousuario
+class TipoUsuarioSearch extends Tipousuario
 {
     /**
      * @inheritdoc
