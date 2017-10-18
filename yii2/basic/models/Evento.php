@@ -88,6 +88,6 @@ class Evento extends \yii\db\ActiveRecord
      */
     public function getUsuarioeventos()
     {
-        return $this->hasMany(Usuarioevento::className(), ['id_evento' => 'id_evento']);
+        return $this->hasMany(UsuarioEvento::className(), ['id_evento' => 'id_evento']);
     }
 }

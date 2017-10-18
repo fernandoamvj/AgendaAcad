@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Tipousuario;
-use app\models\TipousuarioSearch;
+use app\models\TipoUsuario;
+use app\models\TipoUsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * TipousuarioController implements the CRUD actions for Tipousuario model.
  */
-class TipousuarioController extends Controller
+class TipoUsuarioController extends Controller
 {
     /**
      * @inheritdoc
@@ -115,7 +115,7 @@ class TipousuarioController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Tipousuario::findOne($id)) !== null) {
+        if (($model = TipoUsuario::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
