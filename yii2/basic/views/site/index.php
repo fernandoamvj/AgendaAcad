@@ -11,7 +11,7 @@ $this->title = 'AgendaAcad';
     <div class="jumbotron">
 
 
-         <img src="\Projetos\AgendaAcad\yii2\basic\Images\logoAgendaAcad.png" alt="logo" style="width:561.375px;height:400px;">
+         <img src="\AgendaAcad\yii2\basic\Images\logoAgendaAcad.png" alt="logo" style="width:561.375px;height:400px;">
         <!--  Html::img('@app/Images/logoAgendaAcad.png', ['alt' => 'logo'])
         <!-- <h1>Agenda Acad</h1> -->
 
