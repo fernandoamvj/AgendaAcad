@@ -9,13 +9,19 @@ $this->title = 'Update Usuario: ' . $model->codigo;
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->codigo, 'url' => ['view', 'codigo' => $model->codigo, 'email' => $model->email]];
 $this->params['breadcrumbs'][] = 'Update';
+
 ?>
 <div class="usuario-update">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
+    <br>
+    <?= Html::a('Remover Eventos Cadastrados', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <br>
 
 </div>

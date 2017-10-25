@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'data_hora')->textInput() ?>
+    <?= $form->field($model, 'data_hora')->textInput(['type'=>'date']) ?>
 
     <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
