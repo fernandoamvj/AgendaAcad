@@ -8,6 +8,7 @@ use app\models\DisciplinaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\Component;
 
 /**
  * DisciplinaController implements the CRUD actions for Disciplina model.
@@ -37,7 +38,9 @@ class DisciplinaController extends Controller
     {
         $searchModel = new DisciplinaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        if(!Yii::$app->user->isGuest)
+            if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
+                $dataProvider->query->filterWhere(['id_monitor' => Yii::$app->user->identity->codigo]);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

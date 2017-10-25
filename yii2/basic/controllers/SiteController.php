@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Disciplina;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -80,7 +81,14 @@ class SiteController extends Controller
           if(Yii::$app->user->identity->tipo==2) {
                 return $this->render('calendario');
             }
+            if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
+                return $this->render('calendario3');
             return $this->render('calendario2');
+            /*$disciplinas_monitoradas = Disciplina::find()
+                ->where(['id_monitor' => Yii::$app->user->identity->codigo])
+                ->orderBy('id_disciplina')
+                ->all()
+                ->count();*/
         }
         return $this->render('login', [
             'model' => $model,
@@ -132,7 +140,10 @@ class SiteController extends Controller
         return $this->render('calendario2');
     }
 
-
+    public function actionCalendario3()
+    {
+        return $this->render('calendario3');
+    }
 
 
 }
