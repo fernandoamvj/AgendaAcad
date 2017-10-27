@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Usuario;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Disciplina */
@@ -13,11 +15,10 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'id_monitor')->textInput() ?>
-
-    <?= $form->field($model, 'datainicio')->textInput(['type'=>'date']) ?>
-
+    
+    <?= $form->field($model, 'id_monitor')->dropDownList(
+        ArrayHelper::map(Usuario::find()->all(),'codigo','nome'),['prompt'=>'Selecione Aluno']
+    ) ?>
     <?= $form->field($model, 'datafim')->textInput(['type'=>'date']) ?>
 
     <div class="form-group">

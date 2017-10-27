@@ -133,6 +133,13 @@ class SiteController extends Controller
     }
 
 
+    public function actionHello(){
+        
+                $name = 'jhon';
+                return $this->render('hello',array('name'=>$name));
+                    
+    }
+
 
 
 }

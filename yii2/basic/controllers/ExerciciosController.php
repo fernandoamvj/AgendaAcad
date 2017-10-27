@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\CadastroModel;
+use app\models\Usuario;
 use yii\base\Controller;
 
 class ExerciciosController extends Controller
@@ -29,6 +30,8 @@ class ExerciciosController extends Controller
         return $this->render('formulario', [
             'model' => $cadastroModel
         ]);
+    
     }
+
 
 }

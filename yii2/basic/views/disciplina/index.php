@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Usuario;
+use yii\db\ActiveQuery;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DisciplinaSearch */
@@ -13,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="disciplina-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?= $name; ?>
+    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -29,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_professor',
             'id_monitor',
             'datainicio',
+            
             // 'datafim',
 
             ['class' => 'yii\grid\ActionColumn'],

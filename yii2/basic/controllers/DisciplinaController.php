@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Disciplina;
+use app\models\Usuario;
 use app\models\DisciplinaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\ActiveRecord;
 
 /**
  * DisciplinaController implements the CRUD actions for Disciplina model.
@@ -29,6 +31,8 @@ class DisciplinaController extends Controller
         ];
     }
 
+    
+
     /**
      * Lists all Disciplina models.
      * @return mixed
@@ -37,10 +41,12 @@ class DisciplinaController extends Controller
     {
         $searchModel = new DisciplinaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $name = 'jhon';
+     
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'name'=>$name
         ]);
     }
 
@@ -64,8 +70,11 @@ class DisciplinaController extends Controller
     public function actionCreate()
     {
         $model = new Disciplina();
-         $model->id_professor = Yii::$app->user->identity->codigo;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+         
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_professor = Yii::$app->user->identity->codigo;
+            $model->datainicio = date('y-m-d h:m:s');
+            $model->save();
 
             return $this->redirect(['view', 'id' => $model->idDisciplina]);
         } else {
@@ -122,4 +131,11 @@ class DisciplinaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+   
+    
 }
+
+
+
+
