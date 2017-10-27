@@ -3,17 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Usuario;
-use app\models\UsuarioSearch;
-use app\models\TipoUsuarioSearch;
+use app\models\UsuarioEvento;
+use app\models\UsuarioEventoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsuarioController implements the CRUD actions for Usuario model.
+ * UsuarioEventoController implements the CRUD actions for UsuarioEvento model.
  */
-class UsuarioController extends Controller
+class UsuarioEventoController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,17 +30,14 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Lists all Usuario models.
+     * Lists all UsuarioEvento models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UsuarioSearch();
+        $searchModel = new UsuarioEventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if(!Yii::$app->user->isGuest)
-            $dataProvider->query->filterWhere(['codigo' => Yii::$app->user->identity->codigo]);
-        else
-            $dataProvider->query->filterWhere(['codigo' => 0]);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -49,52 +45,47 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Displays a single Usuario model.
-     * @param integer $codigo
-     * @param string $email
+     * Displays a single UsuarioEvento model.
+     * @param integer $id
      * @return mixed
      */
-    public function actionView($codigo, $email)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($codigo, $email),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Usuario model.
+     * Creates a new UsuarioEvento model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Usuario();
+        $model = new UsuarioEvento();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'codigo' => $model->codigo, 'email' => $model->email]);
+            return $this->redirect(['view', 'id' => $model->id_usuario_evento]);
         } else {
-            $searchModel = new TipousuarioSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             return $this->render('create', [
                 'model' => $model,
-                'tiposUsuarios' =>$dataProvider
             ]);
         }
     }
 
     /**
-     * Updates an existing Usuario model.
+     * Updates an existing UsuarioEvento model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $codigo
-     * @param string $email
+     * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($codigo, $email)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($codigo, $email);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'codigo' => $model->codigo, 'email' => $model->email]);
+            return $this->redirect(['view', 'id' => $model->id_usuario_evento]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -103,30 +94,28 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Deletes an existing Usuario model.
+     * Deletes an existing UsuarioEvento model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $codigo
-     * @param string $email
+     * @param integer $id
      * @return mixed
      */
-    public function actionDelete($codigo, $email)
+    public function actionDelete($id)
     {
-        $this->findModel($codigo, $email)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Usuario model based on its primary key value.
+     * Finds the UsuarioEvento model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $codigo
-     * @param string $email
-     * @return Usuario the loaded model
+     * @param integer $id
+     * @return UsuarioEvento the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($codigo, $email)
+    protected function findModel($id)
     {
-        if (($model = Usuario::findOne(['codigo' => $codigo, 'email' => $email])) !== null) {
+        if (($model = UsuarioEvento::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

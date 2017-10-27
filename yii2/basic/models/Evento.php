@@ -35,7 +35,7 @@ class Evento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data_hora', 'descricao', 'nome', 'tipo'], 'required'],
+            [['data_hora', 'nome', 'tipo'], 'required'],
             [['data_hora'], 'safe'],
             [['id_disciplina'], 'integer'],
             [['descricao'], 'string', 'max' => 300],

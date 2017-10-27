@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Disciplina;
 
 AppAsset::register($this);
 ?>
@@ -42,9 +43,14 @@ AppAsset::register($this);
             ) : (
                 Yii::$app->user->identity->tipo==2 ? (
                     ['label' => 'Home', 'url' => ['site/calendario']]
-            ):(
-                    ['label' => 'Home', 'url' => ['site/calendario2']]
-            )),
+                ):(
+                    Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0 ? (
+                        ['label' => 'Home', 'url' => ['site/calendario3']]
+                    ):(
+                        ['label' => 'Home', 'url' => ['site/calendario2']]
+                    )
+                )
+            ),
            // ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
