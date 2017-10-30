@@ -30,7 +30,7 @@ class UsuarioEvento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_evento', 'id_usuario'], 'required'],
+            [['id_evento', 'id_usuario'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             [['id_evento', 'id_usuario'], 'integer'],
             [['id_evento'], 'exist', 'skipOnError' => true, 'targetClass' => Evento::className(), 'targetAttribute' => ['id_evento' => 'id_evento']],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'codigo']],

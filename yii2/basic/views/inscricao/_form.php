@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Disciplina;
+use app\models\Usuario;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Inscricao */
@@ -12,9 +15,10 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_disciplina')->textInput() ?>
+    <?= $form->field($model, 'id_disciplina')->dropDownList(
+        ArrayHelper::map(Disciplina::find()->all(),'idDisciplina', 'nome'),['prompt'=>'Selecione Disciplina']
+    ) ?>
 
-    <?= $form->field($model, 'id_usuario')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

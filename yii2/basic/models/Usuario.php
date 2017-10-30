@@ -36,7 +36,7 @@ class Usuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'email', 'tipo', 'senha'], 'required'],
+            [['nome', 'email', 'tipo', 'senha'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             [['codigo', 'tipo'], 'integer'],
             [['nome'], 'string', 'max' => 50],
             [['email'], 'email'],

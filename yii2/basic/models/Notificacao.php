@@ -29,7 +29,7 @@ class Notificacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_evento', 'data_hora_notificacao'], 'required'],
+            [['id_evento', 'data_hora_notificacao'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             [['id_evento'], 'integer'],
             [['data_hora_notificacao'], 'safe'],
             [['id_evento'], 'exist', 'skipOnError' => true, 'targetClass' => Evento::className(), 'targetAttribute' => ['id_evento' => 'id_evento']],

@@ -37,7 +37,10 @@ class InscricaoController extends Controller
     {
         $searchModel = new InscricaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        if(!Yii::$app->user->isGuest)
+            $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);
+        else
+            $dataProvider->query->filterWhere(['id_usuario' => 0]);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -65,7 +68,9 @@ class InscricaoController extends Controller
     {
         $model = new Inscricao();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->id_usuario = Yii::$app->user->identity->codigo;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->codigo]);
         } else {
             return $this->render('create', [

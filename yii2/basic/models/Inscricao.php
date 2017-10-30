@@ -30,7 +30,7 @@ class Inscricao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_disciplina', 'id_usuario'], 'required'],
+            [['id_disciplina'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             [['id_disciplina', 'id_usuario'], 'integer'],
             [['id_disciplina'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['id_disciplina' => 'idDisciplina']],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'codigo']],

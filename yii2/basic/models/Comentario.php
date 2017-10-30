@@ -32,7 +32,7 @@ class Comentario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_evento', 'id_usuario'], 'required'],
+            [['id_evento', 'id_usuario'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             [['id_evento', 'id_usuario'], 'integer'],
             [['data_comentario'], 'safe'],
             [['comentario'], 'string', 'max' => 300],
