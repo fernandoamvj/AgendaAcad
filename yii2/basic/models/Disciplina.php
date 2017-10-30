@@ -35,7 +35,7 @@ class Disciplina extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'id_professor', 'datainicio', 'datafim'], 'required'],
+            [['nome', 'id_professor', 'id_monitor','datainicio', 'datafim'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             //[['id_professor', 'id_monitor'], 'integer'],
             [['datainicio', 'datafim'], 'safe'],
             [['nome'], 'string', 'max' => 45],
