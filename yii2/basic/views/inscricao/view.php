@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Inscricao */
 
 $this->title = $model->codigo;
-$this->params['breadcrumbs'][] = ['label' => 'Inscricaos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Inscrições', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="inscricao-view">

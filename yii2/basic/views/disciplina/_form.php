@@ -14,7 +14,7 @@ use app\models\Usuario;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nome_disciplina')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'id_monitor')->dropDownList(
         ArrayHelper::map(Usuario::find()->all(),'codigo','nome'),['prompt'=>'Selecione Aluno']

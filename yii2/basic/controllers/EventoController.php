@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Evento;
+use app\models\UsuarioEvento;
 use app\models\EventoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,6 +38,15 @@ class EventoController extends Controller
     {
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if(!Yii::$app->user->isGuest) {
+            /*$dataProvider = Evento::find()->select(['evento.*'])
+                                        ->leftJoin('usuarioevento ue',
+                                                        ['evento.id_evento = ue.id_evento'],
+                                                        ['ue.id_usuario' => Yii::$app->user->identity->codigo]);*/
+        } else {
+            $dataProvider->query->filterWhere(['id_evento' => 0]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,

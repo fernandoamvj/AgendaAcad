@@ -16,7 +16,11 @@ use app\models\Usuario;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'id_disciplina')->dropDownList(
-        ArrayHelper::map(Disciplina::find()->all(),'idDisciplina', 'nome'),['prompt'=>'Selecione Disciplina']
+        ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome 
+                                                    FROM disciplina 
+                                                    LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo',[])
+                                    ->asArray()
+                                    ->all(),'idDisciplina', 'nome', 'nome_disciplina'),['prompt'=>'Selecione Disciplina']
     ) ?>
 
 
