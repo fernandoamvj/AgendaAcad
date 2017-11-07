@@ -18,8 +18,8 @@ class EventoSearch extends Evento
     public function rules()
     {
         return [
-            [['id_evento', 'id_disciplina'], 'integer'],
-            [['data_hora', 'descricao', 'nome', 'tipo'], 'safe'],
+            [['id_evento', 'id_disciplina', 'id_usuario'], 'integer'],
+            [['data', 'hora', 'descricao', 'nome', 'tipo'], 'safe'],
         ];
     }
 
@@ -60,8 +60,10 @@ class EventoSearch extends Evento
         // grid filtering conditions
         $query->andFilterWhere([
             'id_evento' => $this->id_evento,
-            'data_hora' => $this->data_hora,
+            'data' => $this->data,
+            'hora' => $this->hora,
             'id_disciplina' => $this->id_disciplina,
+            'id_usuario' => $this->id_usuario,
         ]);
 
         $query->andFilterWhere(['like', 'descricao', $this->descricao])
