@@ -8,16 +8,17 @@ use Yii;
  * This is the model class for table "evento".
  *
  * @property integer $id_evento
- * @property string $data_hora
+ * @property string $data
+ * @property string $hora
  * @property string $descricao
  * @property integer $id_disciplina
+ * @property integer $id_usuario
  * @property string $nome
  * @property string $tipo
  *
  * @property Comentario[] $comentarios
  * @property Disciplina $idDisciplina
  * @property Notificacao[] $notificacaos
- * @property Usuarioevento[] $usuarioeventos
  */
 class Evento extends \yii\db\ActiveRecord
 {
@@ -35,9 +36,9 @@ class Evento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data_hora', 'nome', 'tipo'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
-            [['data_hora'], 'safe'],
-            [['id_disciplina'], 'integer'],
+            [['data', 'hora', 'descricao', 'id_usuario', 'nome', 'tipo'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
+            [['data', 'hora'], 'safe'],
+            [['id_disciplina', 'id_usuario'], 'integer'],
             [['descricao'], 'string', 'max' => 300],
             [['nome', 'tipo'], 'string', 'max' => 45],
             [['id_disciplina'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['id_disciplina' => 'idDisciplina']],
@@ -51,9 +52,11 @@ class Evento extends \yii\db\ActiveRecord
     {
         return [
             'id_evento' => 'Id Evento',
-            'data_hora' => 'Data Hora',
+            'data' => 'Data',
+            'hora' => 'Hora',
             'descricao' => 'Descricao',
             'id_disciplina' => 'Id Disciplina',
+            'id_usuario' => 'Id Usuario',
             'nome' => 'Nome',
             'tipo' => 'Tipo',
         ];
@@ -81,13 +84,5 @@ class Evento extends \yii\db\ActiveRecord
     public function getNotificacaos()
     {
         return $this->hasMany(Notificacao::className(), ['id_evento' => 'id_evento']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsuarioeventos()
-    {
-        return $this->hasMany(UsuarioEvento::className(), ['id_evento' => 'id_evento']);
     }
 }

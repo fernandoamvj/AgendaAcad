@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Disciplina;
-use app\models\Usuario;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Inscricao */
@@ -16,7 +15,11 @@ use app\models\Usuario;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'id_disciplina')->dropDownList(
-        ArrayHelper::map(Disciplina::find()->all(),'idDisciplina', 'nome'),['prompt'=>'Selecione Disciplina']
+        ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome 
+                                                    FROM disciplina 
+                                                    LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo',[])
+                                    ->asArray()
+                                    ->all(),'idDisciplina', 'nome', 'nome_disciplina'),['prompt'=>'Selecione Disciplina']
     ) ?>
 
 

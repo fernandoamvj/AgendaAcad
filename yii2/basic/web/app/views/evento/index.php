@@ -4,20 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\InscricaoSearch */
+/* @var $searchModel app\models\EventoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inscrição';
+$this->title = 'Eventos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="inscricao-index">
+<div class="evento-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Inscrição', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,9 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'codigo',
+            'id_evento',
+            'data_hora',
+            'descricao',
             'id_disciplina',
             'id_usuario',
+            // 'nome',
+            // 'tipo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

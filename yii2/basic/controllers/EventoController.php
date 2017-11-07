@@ -38,6 +38,12 @@ class EventoController extends Controller
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if(!Yii::$app->user->isGuest) {
+            $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);
+        }else{
+            $dataProvider->query->filterWhere(['id_usuario' => 0]);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -65,7 +71,10 @@ class EventoController extends Controller
     {
         $model = new Evento();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_usuario=Yii::$app->user->identity->codigo;
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id_evento]);
         } else {
             return $this->render('create', [

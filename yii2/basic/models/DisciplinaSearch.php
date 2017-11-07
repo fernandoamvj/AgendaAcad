@@ -19,7 +19,7 @@ class DisciplinaSearch extends Disciplina
     {
         return [
             [['idDisciplina', 'id_professor', 'id_monitor'], 'integer'],
-            [['nome', 'datainicio', 'datafim'], 'safe'],
+            [['nome_disciplina', 'datainicio', 'datafim'], 'safe'],
         ];
     }
 
@@ -66,7 +66,7 @@ class DisciplinaSearch extends Disciplina
             'datafim' => $this->datafim,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'nome_disciplina', $this->nome_disciplina]);
 
         return $dataProvider;
     }

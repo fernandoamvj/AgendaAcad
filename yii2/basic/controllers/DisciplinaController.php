@@ -45,10 +45,14 @@ class DisciplinaController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         //$name = 'jhon';
      
-        if(!Yii::$app->user->isGuest)
-            if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
+        if(!Yii::$app->user->isGuest) {
+            if (Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
                 $dataProvider->query->filterWhere(['id_monitor' => Yii::$app->user->identity->codigo]);
-
+            if(Yii::$app->user->identity->tipo == 2)
+                $dataProvider->query->filterWhere(['id_professor' => Yii::$app->user->identity->codigo]);
+        } else {
+            $dataProvider->query->filterWhere(['id_monitor' => 0]);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
