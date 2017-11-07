@@ -17,7 +17,7 @@ use app\models\Usuario;
     <?= $form->field($model, 'nome_disciplina')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'id_monitor')->dropDownList(
-        ArrayHelper::map(Usuario::find()->all(),'codigo','nome'),['prompt'=>'Selecione Aluno']
+        ArrayHelper::map(Usuario::find()->where(['tipo' => 1])->all(),'codigo','nome'),['prompt'=>'Selecione Aluno']
     ) ?>
     <?= $form->field($model, 'datafim')->textInput(['type'=>'date']) ?>
 
