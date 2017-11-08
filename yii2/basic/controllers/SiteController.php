@@ -62,7 +62,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+          return $this->render('index');
+        }
+        else{
+          return $this->actionCalendario();
+        }
     }
 
     /**
@@ -78,17 +83,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-          if(Yii::$app->user->identity->tipo==2) {
-                return $this->render('calendario');
-            }
-            if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
-                return $this->render('calendario3');
-            return $this->render('calendario2');
-            /*$disciplinas_monitoradas = Disciplina::find()
-                ->where(['id_monitor' => Yii::$app->user->identity->codigo])
-                ->orderBy('id_disciplina')
-                ->all()
-                ->count();*/
+          return $this->actionCalendario();
         }
         return $this->render('login', [
             'model' => $model,
@@ -132,7 +127,14 @@ class SiteController extends Controller
      */
     public function actionCalendario()
     {
+      if (Yii::$app->user->isGuest) {
+          return $this->actionLogin();
+      }
+      if(Yii::$app->user->identity->tipo==2) 
         return $this->render('calendario');
+      if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
+              return $this->render('calendario3');
+      return $this->render('calendario2');
     }
 
     public function actionCalendario2()

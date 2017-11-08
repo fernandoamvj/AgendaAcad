@@ -12,7 +12,7 @@ $this->title = 'Calendario3';
     <p>
     <h2>Eventos </h2>
     <br>
-    <?= Html::a('Criar Evento', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Ver Eventos', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     <br>
     </p>

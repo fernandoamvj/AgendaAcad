@@ -18,7 +18,7 @@ $this->title = 'AgendaAcad';
         <div class=" col-md-12">
             <p class="lead">Aqui voce poderá ver todos os seus compromissos e agendamentos do CEFET!</p>
 
-                <?= Html::a('Meu Calendário', ['login'], ['class' => 'btn btn-lg btn-success']) ?>
+                <?= Html::a('Meu Calendário', ['calendario'], ['class' => 'btn btn-lg btn-success']) ?>
                 <?= Html::a('Cadastrar', ['usuario/create'], ['class' => 'btn btn-lg btn-success']) ?>
             </p>
         </div>
