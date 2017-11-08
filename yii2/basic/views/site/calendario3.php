@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Html;
-$this->title = 'Calendario3';
+$this->title = 'Calendario';
 ?>
 
 <h1>Menu</h1>

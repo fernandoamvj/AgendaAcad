@@ -51,9 +51,13 @@ AppAsset::register($this);
                     )
                 )
             ),
-           // ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Sobre', 'url' => ['/site/about']],
+            ['label' => 'Contato', 'url' => ['/site/contact']],
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Cadastrar', 'url' => ['usuario/create']]
+            ) : (
+                ['label' => 'Minha Conta', 'url' => ['/usuario/index']]
+            ),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
