@@ -39,15 +39,15 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             Yii::$app->user->isGuest ? (
-            ['label' => 'Home', 'url' => ['/site/index']]
+            ['label' => 'Calendário', 'url' => ['/site/login']]
             ) : (
                 Yii::$app->user->identity->tipo==2 ? (
-                    ['label' => 'Home', 'url' => ['site/calendario']]
+                    ['label' => 'Calendário', 'url' => ['site/calendario']]
                 ):(
                     Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0 ? (
-                        ['label' => 'Home', 'url' => ['site/calendario3']]
+                        ['label' => 'Calendário', 'url' => ['site/calendario3']]
                     ):(
-                        ['label' => 'Home', 'url' => ['site/calendario2']]
+                        ['label' => 'Calendário', 'url' => ['site/calendario2']]
                     )
                 )
             ),

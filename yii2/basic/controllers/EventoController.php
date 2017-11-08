@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Evento;
 use app\models\EventoSearch;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,10 +40,17 @@ class EventoController extends Controller
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $events = Evento::find()->addSelect('e.*')
-            ->from('evento e')
-            ->leftJoin('inscricao i', 'i.id_disciplina = e.id_disciplina', ['i.id_usuario' => Yii::$app->user->identity->codigo])
-            ->all();
+        $events1 = Evento::find()
+            ->select('evento.*')
+            ->from('evento')
+            ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+        $events2 = Evento::find()
+            ->select('evento.*')
+            ->from('inscricao')
+            ->leftJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
+            ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+
+        $events = $events1->union($events2)->all();
 
         foreach($events as $evento){
             $Event = new \yii2fullcalendar\models\Event();
@@ -50,7 +59,6 @@ class EventoController extends Controller
             $Event->start = date($evento->data);
             $events[] = $Event;
         }
-
 
         if(!Yii::$app->user->isGuest) {
             $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);

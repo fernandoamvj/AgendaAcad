@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Disciplina;
+use MongoDB\Driver\Query;
 use Yii;
 use app\models\Inscricao;
 use app\models\InscricaoSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,14 +40,18 @@ class InscricaoController extends Controller
     {
         $searchModel = new InscricaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if(!Yii::$app->user->isGuest)
+
+
+        if (!Yii::$app->user->isGuest) {
             $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);
-        else
+        }else{
             $dataProvider->query->filterWhere(['id_usuario' => 0]);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+
     }
 
     /**
