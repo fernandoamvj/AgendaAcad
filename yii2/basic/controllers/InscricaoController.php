@@ -78,7 +78,7 @@ class InscricaoController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $model->id_usuario = Yii::$app->user->identity->codigo;
             $model->save();
-            return $this->redirect(['view', 'id' => $model->codigo]);
+            return $this->redirect(['index', 'id' => $model->codigo]);
         } else {
             return $this->render('create', [
                 'model' => $model,

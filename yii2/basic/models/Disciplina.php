@@ -54,11 +54,11 @@ class Disciplina extends \yii\db\ActiveRecord
     {
         return [
             'idDisciplina' => 'Id Disciplina',
-            'nome_disciplina' => 'Nome',
+            'nome_disciplina' => 'Nome da Disciplina',
             //'id_professor' => 'Id Professor',
-            'id_monitor' => 'Nome do Aluno Monitor',
-            'datainicio' => 'Datainicio',
-            'datafim' => 'Datafim',
+            'id_monitor' => 'Código do Aluno Monitor',
+            'datainicio' => 'Data de início',
+            'datafim' => 'Data de fim',
         ];
     }
 

@@ -66,7 +66,7 @@ class NotificacaoController extends Controller
         $model = new Notificacao();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_notificacao]);
+            return $this->redirect(['index', 'id' => $model->id_notificacao]);
         } else {
             return $this->render('create', [
                 'model' => $model,

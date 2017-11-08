@@ -99,7 +99,7 @@ class EventoController extends Controller
             $model->id_usuario=Yii::$app->user->identity->codigo;
             $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id_evento]);
+            return $this->redirect(['index', 'id' => $model->id_evento]);
         } else {
             return $this->render('create', [
                 'model' => $model,

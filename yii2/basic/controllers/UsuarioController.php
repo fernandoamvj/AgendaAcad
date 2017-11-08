@@ -71,7 +71,7 @@ class UsuarioController extends Controller
         $model = new Usuario();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'codigo' => $model->codigo, 'email' => $model->email]);
+            return $this->redirect(['site/index', 'codigo' => $model->codigo, 'email' => $model->email]);
         } else {
             $searchModel = new TipousuarioSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

@@ -88,7 +88,7 @@ class DisciplinaController extends Controller
             $model->datainicio = date('y-m-d h:m:s');
             $model->save();
 
-            return $this->redirect(['view', 'id' => $model->idDisciplina]);
+            return $this->redirect(['index', 'id' => $model->idDisciplina]);
         } else {
             return $this->render('create', [
                 'model' => $model,
