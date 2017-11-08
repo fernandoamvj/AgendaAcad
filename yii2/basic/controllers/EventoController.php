@@ -38,8 +38,10 @@ class EventoController extends Controller
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $events = Evento::find()->all();
-
+        $events = Evento::find()->addSelect('e.*')
+            ->from('evento e')
+            ->leftJoin('inscricao i', 'i.id_disciplina = e.id_disciplina', ['i.id_usuario' => Yii::$app->user->identity->codigo])
+            ->all();
 
         foreach($events as $evento){
             $Event = new \yii2fullcalendar\models\Event();
