@@ -38,6 +38,18 @@ class EventoController extends Controller
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $events = Evento::find()->all();
+
+
+        foreach($events as $evento){
+            $Event = new \yii2fullcalendar\models\Event();
+            $Event->id = 1;
+            $Event->title = $evento->nome;
+            $Event->start = date($evento->data);
+            $events[] = $Event;
+        }
+
+
         if(!Yii::$app->user->isGuest) {
             $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);
         }else{
@@ -45,8 +57,10 @@ class EventoController extends Controller
         }
 
         return $this->render('index', [
+            'events' => $events,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+
         ]);
     }
 
