@@ -3,6 +3,15 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 $this->title = 'Calendario';
+
+/*
+<p>
+    <h2>Monitoria </h2>
+    <br>
+    <?= Html::a('Disciplinas em que sou Monitor', ['disciplina/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <br>
+</p>
+*/
 ?>
 
 <h1>Menu</h1>
@@ -21,13 +30,6 @@ $this->title = 'Calendario';
     <h2>Disciplina </h2>
     <br>
     <?= Html::a('Inscrever Disciplina', ['inscricao/index'], ['class' => 'btn btn-lg btn-success']) ?>
-    <br>
-    </p>
-
-    <p>
-    <h2>Monitoria </h2>
-    <br>
-    <?= Html::a('Disciplinas em que sou Monitor', ['disciplina/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 
