@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Evento', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
@@ -29,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id_evento',
+            'nome',
+            'descricao',
             'data',
             'hora',
-            'descricao',
             'id_disciplina',
-            // 'id_usuario',
-            // 'nome',
-            // 'tipo',
+            'id_usuario',
+            //'tipo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

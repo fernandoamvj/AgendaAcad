@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Evento */
 
-$this->title = 'Update Evento: ' . $model->id_evento;
+$this->title = 'Atualizar Evento: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Eventos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_evento, 'url' => ['view', 'id' => $model->id_evento]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => $model->nome, 'url' => ['view', 'id' => $model->id_evento]];
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="evento-update">
 

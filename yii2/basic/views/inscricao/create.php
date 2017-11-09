@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Inscricao */
 
-$this->title = 'Create Inscricao';
-$this->params['breadcrumbs'][] = ['label' => 'Inscricaos', 'url' => ['index']];
+$this->title = 'Criar Inscricao';
+$this->params['breadcrumbs'][] = ['label' => 'Inscrições', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="inscricao-create">

@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Disciplina;
 use Yii;
 use app\models\Evento;
 use app\models\EventoSearch;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,8 +41,23 @@ class EventoController extends Controller
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $events = Evento::find()->all();
+        $eventos_criados = Evento::find()
+            ->select('evento.*')
+            ->from('evento')
+            ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+        $eventos_inscricao_disciplina = Evento::find()
+            ->select('evento.*')
+            ->from('inscricao')
+            ->leftJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
+            ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+        $eventos_monitoria_disciplina = Evento::find()
+            ->select('evento.*')
+            ->from('disciplina')
+            ->leftJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
+            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo]);
 
+        //aqui sao os eventos a serem exibidos no calendario
+        $events = $eventos_criados->union($eventos_inscricao_disciplina)->all();
 
         foreach($events as $evento){
             $Event = new \yii2fullcalendar\models\Event();
@@ -49,9 +67,17 @@ class EventoController extends Controller
             $events[] = $Event;
         }
 
-
         if(!Yii::$app->user->isGuest) {
-            $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);
+            //aqui sao os eventos a serem exibidos na lista logo abaixo, eles podem ser editados
+            $eventos = $eventos_criados;
+            //é monitor
+            if (Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
+                $eventos = $eventos->union($eventos_monitoria_disciplina);
+
+            $dataProvider =  new ActiveDataProvider([
+                'query' => $eventos,
+            ]);
+
         }else{
             $dataProvider->query->filterWhere(['id_usuario' => 0]);
         }
@@ -89,7 +115,7 @@ class EventoController extends Controller
             $model->id_usuario=Yii::$app->user->identity->codigo;
             $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id_evento]);
+            return $this->redirect(['index', 'id' => $model->id_evento]);
         } else {
             return $this->render('create', [
                 'model' => $model,

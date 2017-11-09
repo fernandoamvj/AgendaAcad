@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Disciplina;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Evento */
@@ -18,14 +20,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_disciplina')->textInput() ?>
+    <?= $form->field($model, 'id_disciplina')->dropDownList(ArrayHelper::map(Disciplina::find()->where(['id_professor' => Yii::$app->user->identity->codigo])->orWhere(['id_monitor' => Yii::$app->user->identity->codigo])->all(),'idDisciplina','nome_disciplina'),['prompt'=>'Selecione Disciplina']
+    ) ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tipo')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

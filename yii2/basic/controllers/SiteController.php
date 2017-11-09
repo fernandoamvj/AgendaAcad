@@ -62,12 +62,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-          return $this->render('index');
-        }
-        else{
-          return $this->actionCalendario();
-        }
+        return $this->render('index');
     }
 
     /**
@@ -144,7 +139,8 @@ class SiteController extends Controller
 
 
 
-    public function actionHello(){
+    public function actionHello()
+    {
         
                 $name = 'jhon';
                 return $this->render('hello',array('name'=>$name));
@@ -157,6 +153,9 @@ class SiteController extends Controller
         return $this->render('calendario3');
     }
 
-
+    public function actionAbout()
+    {
+        return $this->render('about');
+    }
 
 }

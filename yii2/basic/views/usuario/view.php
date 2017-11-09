@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuario */
 
-$this->title = $model->codigo;
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
+$this->title = $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Minha Conta', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuario-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'codigo' => $model->codigo, 'email' => $model->email], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'codigo' => $model->codigo, 'email' => $model->email], [
+        <?= Html::a('Atualizar informações', ['update', 'codigo' => $model->codigo, 'email' => $model->email], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Excluir', ['delete', 'codigo' => $model->codigo, 'email' => $model->email], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza de que quer excluir?',
                 'method' => 'post',
             ],
         ]) ?>

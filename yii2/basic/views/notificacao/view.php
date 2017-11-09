@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Notificacao */
 
 $this->title = $model->id_notificacao;
-$this->params['breadcrumbs'][] = ['label' => 'Notificacaos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Notificações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="notificacao-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id_notificacao], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id_notificacao], [
+        <?= Html::a('Atualizar informações', ['update', 'id' => $model->id_notificacao], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Excluir', ['delete', 'id' => $model->id_notificacao], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza de que quer excluir?',
                 'method' => 'post',
             ],
         ]) ?>
