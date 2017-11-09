@@ -18,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+     <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
+      'events'=> $events,
+    )); ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

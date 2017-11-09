@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Usuario;
 use dosamigos\datepicker\DatePicker;
+use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model app\models\Disciplina */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,10 +16,20 @@ use dosamigos\datepicker\DatePicker;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nome_disciplina')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'id_monitor')->dropDownList(
+
+     <!-- <?= $form->field($model, 'id_monitor')->dropDownList(
         ArrayHelper::map(Usuario::find()->where(['tipo' => 1])->all(),'codigo','nome'),['prompt'=>'Selecione Aluno']
-    ) ?>
+    ) ?>  -->
+
+   <?= $form->field($model, 'id_monitor')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(Usuario::find()->where(['tipo' => 1])->all(),'codigo','nome'),
+        'language' => 'pt',
+        'options' => ['placeholder' => 'Selecione Aluno ... '],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+
     <?= $form->field($model, 'datafim')->widget(
         DatePicker::className(), [
             // inline too, not bad

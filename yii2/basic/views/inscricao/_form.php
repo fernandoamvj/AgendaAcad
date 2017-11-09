@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Disciplina;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Inscricao */
@@ -21,6 +22,8 @@ use app\models\Disciplina;
                                     ->asArray()
                                     ->all(),'idDisciplina', 'nome', 'nome_disciplina'),['prompt'=>'Selecione Disciplina']
     ) ?>
+
+    
 
 
     <div class="form-group">

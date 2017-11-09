@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_monitor',
             'datainicio',
             
-            // 'datafim',
+            'datafim',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
