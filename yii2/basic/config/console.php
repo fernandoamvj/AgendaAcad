@@ -9,6 +9,18 @@ $config = [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'localhost',
+                'username' => 'root',
+                'password' => '',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -21,6 +33,7 @@ $config = [
             ],
         ],
         'db' => $db,
+        // ...
     ],
     'params' => $params,
     /*

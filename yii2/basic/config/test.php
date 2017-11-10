@@ -12,7 +12,8 @@ return [
     'components' => [
         'db' => $db,
         'mailer' => [
-            'useFileTransport' => true,
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
         ],
         'assetManager' => [            
             'basePath' => __DIR__ . '/../web/assets',

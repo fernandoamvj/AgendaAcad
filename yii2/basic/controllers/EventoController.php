@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Disciplina;
+use app\models\Usuario;
 use Yii;
 use app\models\Evento;
 use app\models\EventoSearch;
@@ -11,7 +12,7 @@ use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\swiftmailer\Mailer;
 /**
  * EventoController implements the CRUD actions for Evento model.
  */
@@ -72,7 +73,7 @@ class EventoController extends Controller
             $eventos = $eventos_criados;
             //é monitor
             if (Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
-                $eventos = $eventos->union($eventos_monitoria_disciplina);
+                $eventos = $eventos->union($eventos_monitoria_disciplina)->all();
 
             $dataProvider =  new ActiveDataProvider([
                 'query' => $eventos,
@@ -109,11 +110,41 @@ class EventoController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Evento();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->id_usuario=Yii::$app->user->identity->codigo;
             $model->save();
+
+            $emails_professor_monitor = Usuario::find()
+                                        ->select('email')
+                                        ->from('usuario')
+                                        ->where(array('in', 'id_usuario', (new Query())
+                                            ->select(['id_professor','id_monitor'])
+                                            ->from('disciplina')
+                                            ->where(['idDisciplina' => $model->id_disciplina])
+                                            ->all()));
+            $emails_aluno = Usuario::find()
+                            ->select('email')
+                            ->from('usuario')
+                            ->where(array('in', 'id_usuario', (new Query())
+                                ->select(['id_usuario'])
+                                ->from('disciplina')
+                                ->leftJoin('inscricao','disciplina.idDisciplina = inscricao.id_disciplina',[])
+                                ->where(['idDisciplina' => $model->id_disciplina])
+                                ->all()));
+								
+            $emails = $emails_professor_monitor->union($emails_aluno)->all();
+			
+            foreach($emails as $email)
+                $mailer = new yii\swiftmailer\Mailer;
+                $mailer->compose()
+                    ->setFrom('agendaacad@domain.com')
+                    ->setTo($email->email)
+                    ->setSubject('Criação do evento: ' . $model->nome)
+                    ->setTextBody("Informações: \nNome: ". $model->nome . "\nData: ". $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
+                    ->send();
 
             return $this->redirect(['index', 'id' => $model->id_evento]);
         } else {
@@ -134,6 +165,43 @@ class EventoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $emails_professor = Usuario::find()
+                ->select('email')
+                ->from('usuario')
+                ->where(array('in', 'codigo', (new Query())
+                    ->select(['id_professor'])
+                    ->from('disciplina')
+                    ->where(['idDisciplina' => $model->id_disciplina])
+                    ->all()));
+            $emails_monitor = Usuario::find()
+                ->select('email')
+                ->from('usuario')
+                ->where(array('in', 'codigo', (new Query())
+                    ->select(['id_monitor'])
+                    ->from('disciplina')
+                    ->where(['idDisciplina' => $model->id_disciplina])
+                    ->all()));
+            $emails_aluno = Usuario::find()
+                ->select('email')
+                ->from('usuario')
+                ->where(array('in', 'codigo', (new Query())
+                    ->select(['id_usuario'])
+                    ->from('disciplina')
+                    ->leftJoin('inscricao','disciplina.idDisciplina = inscricao.id_disciplina',[])
+                    ->where(['idDisciplina' => $model->id_disciplina])
+                    ->all()));
+            $emails = $emails_professor->union($emails_monitor)->union($emails_aluno)->all();
+
+            foreach($emails as $email)
+                $mailer = new yii\swiftmailer\Mailer()->mailer;
+                $mailer->compose()
+                    ->setFrom('agendaacad@domain.com')
+                    ->setTo($email->email)
+                    ->setSubject('Alterações no evento: ' . $model->nome)
+                    ->setTextBody("Novas informações: \nNome: ". $model->nome . "\nData: ". $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
+                    ->send();
+
             return $this->redirect(['view', 'id' => $model->id_evento]);
         } else {
             return $this->render('update', [

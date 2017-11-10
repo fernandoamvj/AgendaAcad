@@ -18,27 +18,16 @@ class ComposerStaticInitc22a6a76a7e576c519fe0104bbd8dbd7
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
-            'yii\\jui\\' => 8,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
-            'yii2fullcalendar\\' => 17,
         ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
-        ),
-        'k' => 
-        array (
-            'kartik\\select2\\' => 15,
-            'kartik\\base\\' => 12,
-        ),
-        'd' => 
-        array (
-            'dosamigos\\datepicker\\' => 21,
         ),
         'c' => 
         array (
@@ -91,10 +80,6 @@ class ComposerStaticInitc22a6a76a7e576c519fe0104bbd8dbd7
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
         ),
-        'yii\\jui\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
-        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
@@ -119,27 +104,11 @@ class ComposerStaticInitc22a6a76a7e576c519fe0104bbd8dbd7
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
-        'yii2fullcalendar\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/philippfrenzel/yii2fullcalendar',
-        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-        ),
-        'kartik\\select2\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
-        ),
-        'kartik\\base\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
-        ),
-        'dosamigos\\datepicker\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-date-picker-widget',
         ),
         'cebe\\markdown\\' => 
         array (

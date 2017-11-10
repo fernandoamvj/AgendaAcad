@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Inscricao */
 
-$this->title = 'Inscrever  em  Disicplina';
+$this->title = 'Inscrever  em  Disciplina';
 $this->params['breadcrumbs'][] = ['label' => 'Inscrições', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
