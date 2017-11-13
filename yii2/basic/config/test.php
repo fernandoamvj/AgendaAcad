@@ -12,7 +12,7 @@ return [
     'components' => [
         'db' => $db,
         'mailer' => [
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'assetManager' => [            
             'basePath' => __DIR__ . '/../web/assets',

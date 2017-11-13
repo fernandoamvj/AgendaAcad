@@ -9,6 +9,10 @@ $config = [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
