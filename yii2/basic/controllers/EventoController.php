@@ -145,7 +145,7 @@ class EventoController extends Controller
 
             foreach($emails as $email)
                 Yii::$app->mailer->compose()
-                    ->setFrom('agendaacad@domain.com')
+                    ->setFrom('agendaacad17@gmail.com')
                     ->setTo($email->email)
                     ->setSubject('Criação do evento: ' . $model->nome)
                     ->setTextBody("Informações: \nNome: ". $model->nome . "\nData: ". $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
@@ -200,12 +200,13 @@ class EventoController extends Controller
             $emails = $emails_professor->union($emails_monitor)->union($emails_aluno)->all();
 
             foreach($emails as $email)
-                (new Mailer())->compose()
-                ->setFrom('agendaacad@domain.com')
+                Yii::$app->mailer->compose()
+                ->setFrom('agendaacad17@gmail.com')
                 ->setTo($email->email)
                 ->setSubject('Alterações no evento: ' . $model->nome)
                 ->setTextBody("Novas informações: \nNome: ". $model->nome . "\nData: ". $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
                 ->send();
+
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->id_evento]);
