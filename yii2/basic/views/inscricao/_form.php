@@ -28,17 +28,6 @@ use kartik\select2\Select2;
         ],
     ]); ?>
 
-    <!-- <?/*= $form->field($model, 'id_disciplina')->dropDownList(ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome
-                                                    FROM disciplina
-                                                    LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo',[])
-        ->asArray()
-        ->all(),
-        'idDisciplina', 'nome', 'nome_disciplina')
-        ,['prompt'=>'Selecione Disciplina'])
-    */?>-->
-
-
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Inscrever' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

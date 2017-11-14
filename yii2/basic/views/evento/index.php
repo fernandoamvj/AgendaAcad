@@ -7,7 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EventoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Eventos';
+$this->title = 'Calendário';
+$title2 = 'Eventos que você tem permissão pra editar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="evento-index">
@@ -21,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
     )); ?>
+
+    <h1><?= Html::encode($title2) ?></h1>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

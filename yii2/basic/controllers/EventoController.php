@@ -8,6 +8,7 @@ use Yii;
 use app\models\Evento;
 use app\models\EventoSearch;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveQuery;
 use yii\db\Query;
 use yii\swiftmailer\Mailer;
 use yii\web\Controller;
@@ -50,34 +51,51 @@ class EventoController extends Controller
         $eventos_inscricao_disciplina = Evento::find()
             ->select('evento.*')
             ->from('inscricao')
-            ->leftJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
+            ->innerJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
             ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
-        $eventos_monitoria_disciplina = Evento::find()
+        $eventos_professor_monitor_disciplina = Evento::find()
             ->select('evento.*')
             ->from('disciplina')
-            ->leftJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
-            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo]);
+            ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
+            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
+            ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
 
         //aqui sao os eventos a serem exibidos no calendario
-        $events = $eventos_criados->union($eventos_inscricao_disciplina)->union($eventos_monitoria_disciplina)->all();
+        $eventos = $eventos_criados->union($eventos_inscricao_disciplina)->union($eventos_professor_monitor_disciplina)->all();
 
-        foreach($events as $evento){
+        foreach($eventos as $evento){
             $Event = new \yii2fullcalendar\models\Event();
             $Event->id = 1;
             $Event->title = $evento->nome;
             $Event->start = date($evento->data);
-            $events[] = $Event;
+            if($evento->id_usuario == Yii::$app->user->identity->codigo)
+                $Event->color = 'yellow';
+            else
+                $Event->color = 'blue';
+            $eventos_visualizaveis[] = $Event;
         }
 
         if(!Yii::$app->user->isGuest) {
-            //aqui sao os eventos a serem exibidos na lista logo abaixo, eles podem ser editados
-            $eventos = $eventos_criados;
-            //é monitor
-            if (Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
-                $eventos = $eventos->union($eventos_monitoria_disciplina);
+            $eventos_criados2 = Evento::find()
+                ->select('evento.*')
+                ->from('evento')
+                ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+            $eventos_professor_monitor_disciplina2 = Evento::find()
+                ->select('evento.*')
+                ->from('disciplina')
+                ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
+                ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
+                ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
 
-            $dataProvider =  new ActiveDataProvider([
-                'query' => $eventos,
+            //aqui sao os eventos a serem exibidos na lista logo abaixo, eles podem ser editados
+            $eventos_editaveis = $eventos_criados2;
+
+            if($eventos_professor_monitor_disciplina2->count()>0)
+                $eventos_editaveis->union($eventos_professor_monitor_disciplina2);
+
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => $eventos_editaveis,
             ]);
 
         }else{
@@ -85,7 +103,7 @@ class EventoController extends Controller
         }
 
         return $this->render('index', [
-            'events' => $events,
+            'events' => $eventos_visualizaveis,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
 
@@ -206,7 +224,6 @@ class EventoController extends Controller
                 ->setSubject('Alterações no evento: ' . $model->nome)
                 ->setTextBody("Novas informações: \nNome: ". $model->nome . "\nData: ". $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
                 ->send();
-
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->id_evento]);
