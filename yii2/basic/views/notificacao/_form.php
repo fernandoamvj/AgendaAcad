@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_evento')->textInput() ?>
-
     <?= $form->field($model, 'data_hora_notificacao')->textInput() ?>
 
     <div class="form-group">

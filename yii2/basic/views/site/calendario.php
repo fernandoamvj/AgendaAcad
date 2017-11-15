@@ -25,4 +25,11 @@ $this->title = 'Calendário';
 <br>
     </p>
 
+    <p>
+    <h2>Notificação </h2>
+    <br>
+    <?= Html::a('Notificação de Eventos Futuros', ['notificacao/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <br>
+    </p>
+
 </div>
