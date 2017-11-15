@@ -137,30 +137,21 @@ class EventoController extends Controller
 
             $emails_professor = Usuario::find()
                             ->select('email')
-                            ->from('usuario')
-                            ->where(array('in', 'codigo', (new Query())
-                                ->select('id_professor')
-                                ->from('disciplina')
-                                ->where(['idDisciplina' => $model->id_disciplina])
-                                ->all()));
+                            ->from('usuario u')
+                            ->innerJoin('disciplina d','u.codigo = d.id_professor',[])
+                            ->where(['d.idDisciplina' => $model->idDisciplina]);
             $emails_monitor = Usuario::find()
                             ->select('email')
-                            ->from('usuario')
-                            ->where(array('in', 'codigo', (new Query())
-                                ->select('id_monitor')
-                                ->from('disciplina')
-                                ->where(['idDisciplina' => $model->id_disciplina])
-                                ->all()));
+                            ->from('usuario u')
+                            ->innerJoin('disciplina d','u.codigo = d.id_monitor',[])
+                            ->where(['d.idDisciplina' => $model->idDisciplina]);
             $emails_aluno = Usuario::find()
                             ->select('email')
-                            ->from('usuario')
-                            ->where(array('in', 'codigo', (new Query())
-                                ->select('id_usuario')
-                                ->from('disciplina')
-                                ->leftJoin('inscricao','disciplina.idDisciplina = inscricao.id_disciplina',[])
-                                ->where(['idDisciplina' => $model->id_disciplina])
-                                ->all()));
-            if($model->id_disciplina != null) {
+                            ->from('usuario u')
+                            ->innerJoin('inscricao i','u.codigo = i.id_usuario',[])
+                            ->where(['i.id_disciplina' => $model->idDisciplina]);
+
+            if($model->idDisciplina != null) {
                 $emails = $emails_professor->union($emails_monitor)->union($emails_aluno)->all();
 
                 foreach ($emails as $email)
@@ -168,7 +159,7 @@ class EventoController extends Controller
                         ->setFrom('agendaacad17@gmail.com')
                         ->setTo($email->email)
                         ->setSubject('Criação do evento: ' . $model->nome)
-                        ->setTextBody("Informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
+                        ->setTextBody("Informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "\nTipo: " . $model->tipo . "\nDescricao: " . $model->descricao)
                         ->send();
             }
 
@@ -195,31 +186,21 @@ class EventoController extends Controller
 
             $emails_professor1 = Usuario::find()
                 ->select('email')
-                ->from('usuario')
-                ->where(array('in', 'codigo', (new Query())
-                    ->select('id_professor')
-                    ->from('disciplina')
-                    ->where(['idDisciplina' => $model->id_disciplina])
-                    ->all()));
+                ->from('usuario u')
+                ->innerJoin('disciplina d','u.codigo = d.id_professor',[])
+                ->where(['d.idDisciplina' => $model->idDisciplina]);
             $emails_monitor1 = Usuario::find()
                 ->select('email')
-                ->from('usuario')
-                ->where(array('in', 'codigo', (new Query())
-                    ->select('id_monitor')
-                    ->from('disciplina')
-                    ->where(['idDisciplina' => $model->id_disciplina])
-                    ->all()));
+                ->from('usuario u')
+                ->innerJoin('disciplina d','u.codigo = d.id_monitor',[])
+                ->where(['d.idDisciplina' => $model->idDisciplina]);
             $emails_aluno1 = Usuario::find()
                 ->select('email')
-                ->from('usuario')
-                ->where(array('in', 'codigo', (new Query())
-                    ->select('id_usuario')
-                    ->from('disciplina')
-                    ->leftJoin('inscricao','disciplina.idDisciplina = inscricao.id_disciplina',[])
-                    ->where(['idDisciplina' => $model->id_disciplina])
-                    ->all()));
+                ->from('usuario u')
+                ->innerJoin('inscricao i','u.codigo = i.id_usuario',[])
+                ->where(['i.id_disciplina' => $model->idDisciplina]);
 
-            if($model->id_disciplina != null) {
+            if($model->idDisciplina != null) {
                 $emails1 = $emails_professor1->union($emails_monitor1)->union($emails_aluno1)->all();
 
                 foreach ($emails1 as $email1)
@@ -227,7 +208,7 @@ class EventoController extends Controller
                         ->setFrom('agendaacad17@gmail.com')
                         ->setTo($email1->email)
                         ->setSubject('Alterações no evento: ' . $model->nome)
-                        ->setTextBody("Novas informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "Tipo: " . $model->tipo . "Descricao: " . $model->descricao)
+                        ->setTextBody("Novas informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "\nTipo: " . $model->tipo . "\nDescricao: " . $model->descricao)
                         ->send();
             }
 
