@@ -27,12 +27,20 @@ $config = [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',//i.e the main  site on mine is mysite.org but the site that is sending emails is  mysite.com but it needs to be set to mail.mysite.org because that is the  main account on the shared hosting.
-                'username' => 'agendaacad17@gmail.com',//NOT  an email account
+                'host' => gethostbyname('smtp.gmail.com'),
+                'username' => 'agendaacad17@gmail.com',
                 'password' => 'paracomisso',
-                'port' => '465',//need a port
-                'encryption' => 'ssl',//must be lowercase for all encryption types or will throw cant find encryption type extension
+                'port' => '465',
+                'encryption' => 'ssl',
+                'streamOptions' => [
+                    'ssl' => [
+                        'allow_self_signed' => true,
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                    ],
+                ],
             ],
+
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

@@ -39,4 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?= Html::a('Visualizar comentários', ['comentario/index', 'id_evento' => $model->id_evento], ['class' => 'btn btn-primary']) ?>
+
 </div>

@@ -65,7 +65,11 @@ class ComentarioController extends Controller
     {
         $model = new Comentario();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_usuario=Yii::$app->user->identity->codigo;
+            $model->data_comentario = date('y-m-d h:m:s');
+
+            $model->save();
             return $this->redirect(['index', 'id' => $model->id_comentario]);
         } else {
             return $this->render('create', [
