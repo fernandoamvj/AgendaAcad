@@ -21,7 +21,19 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
-    )); ?>
+    ));
+     ?>
+
+    <script type='text/javascript'>
+        $('#calendar').fullCalendar({
+            eventClick: function (event){
+                if (event . url) {
+                    window . open(event . url);
+                    return false;
+                }
+            }
+        });
+    </script>
 
     <h1><?= Html::encode($title2) ?></h1>
 

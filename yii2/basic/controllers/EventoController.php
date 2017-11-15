@@ -68,6 +68,7 @@ class EventoController extends Controller
             $Event->id = 1;
             $Event->title = $evento->nome;
             $Event->start = date($evento->data);
+            $Event->url = 'http://localhost/AgendaAcad/yii2/basic/web/index.php?r=evento%2Fview&id='.$evento->id_evento;
             if($evento->id_usuario == Yii::$app->user->identity->codigo)
                 $Event->color = 'yellow';
             else
@@ -75,6 +76,7 @@ class EventoController extends Controller
             $Event->description = $evento->descricao;
             $eventos_visualizaveis[] = $Event;
         }
+
 
         if(!Yii::$app->user->isGuest) {
             $eventos_criados2 = Evento::find()
