@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use app\models\Evento;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoSearch */
@@ -13,29 +16,28 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+    ]);
+    ?>
+
+    <?= $form->field($model, 'id_evento')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(Evento::find()
+            ->select(['nome','data','id_evento'])
+            ->from('evento')
+            ->asArray()
+            ->all(),'id_evento', 'nome', 'data'),
+        'language' => 'pt',
+        'options' => ['placeholder' => 'Digite o evento  ... '],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
     ]); ?>
 
-    <?= $form->field($model, 'id_evento') ?>
+    <?php ActiveForm::end(); ?>
 
-    <?= $form->field($model, 'data') ?>
-
-    <?= $form->field($model, 'hora') ?>
-
-    <?= $form->field($model, 'descricao') ?>
-
-    <?= $form->field($model, 'id_disciplina') ?>
-
-    <?php // echo $form->field($model, 'id_usuario') ?>
-
-    <?php // echo $form->field($model, 'nome') ?>
-
-    <?php // echo $form->field($model, 'tipo') ?>
+    <?php $model->load(Yii::$app->request->post()); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Visualizar Evento', ['view', 'id' => $model->id_evento], ['class' => 'btn btn-primary']) ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
 
 </div>

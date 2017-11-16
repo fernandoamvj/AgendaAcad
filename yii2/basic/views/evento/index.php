@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use app\models\Evento;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EventoSearch */
@@ -14,11 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="evento-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
     ));
@@ -42,7 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id_evento',
             'nome',
             'descricao',
@@ -51,8 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_disciplina',
             'id_usuario',
             //'tipo',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 </div>

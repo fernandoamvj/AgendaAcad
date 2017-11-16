@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Agenda Acad',
+        'brandLabel' => 'Home',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -39,25 +39,25 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             Yii::$app->user->isGuest ? (
-            ['label' => 'Calendário', 'url' => ['/site/login']]
+                ['label' => 'Menu', 'url' => ['/site/login']]
             ) : (
                 Yii::$app->user->identity->tipo==2 ? (
-                    ['label' => 'Calendário', 'url' => ['site/calendario']]
+                    ['label' => 'Menu', 'url' => ['site/calendario']]
                 ):(
                     Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0 ? (
-                        ['label' => 'Calendário', 'url' => ['site/calendario3']]
+                        ['label' => 'Menu', 'url' => ['site/calendario3']]
                     ):(
-                        ['label' => 'Calendário', 'url' => ['site/calendario2']]
+                        ['label' => 'Menu', 'url' => ['site/calendario2']]
                     )
                 )
             ),
             ['label' => 'Sobre', 'url' => ['/site/about']],
-            ['label' => 'Contato', 'url' => ['/site/contact']],
+            ['label' => 'Contato', 'url' => ['/site/contact']],/*
             Yii::$app->user->isGuest ? (
                 ['label' => 'Cadastrar', 'url' => ['usuario/create']]
             ) : (
                 ['label' => 'Minha Conta', 'url' => ['/usuario/index']]
-            ),
+            ),*/
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
