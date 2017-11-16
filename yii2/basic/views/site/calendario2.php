@@ -12,7 +12,7 @@ $this->title = 'Calendário';
     <p>
     <h2>Eventos </h2>
     <br>
-    <?= Html::a('Ver Eventos', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Ver Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     <br>
     </p>
@@ -28,6 +28,13 @@ $this->title = 'Calendário';
     <h2>Notificação </h2>
     <br>
     <?= Html::a('Notificação de Eventos Futuros', ['notificacao/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <br>
+    </p>
+
+    <p>
+    <h2>Conta de Usuário </h2>
+    <br>
+    <?= Html::a('Minha Conta', ['usuario/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 
