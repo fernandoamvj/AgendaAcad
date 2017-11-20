@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Comentario */
 
 $this->title = 'Atualizar Comentário: ' . $model->id_comentario;
-$this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index', 'id_evento' => $model->id_evento]];
 $this->params['breadcrumbs'][] = ['label' => $model->id_comentario, 'url' => ['view', 'id' => $model->id_comentario]];
 $this->params['breadcrumbs'][] = 'Atualizar';
 ?>

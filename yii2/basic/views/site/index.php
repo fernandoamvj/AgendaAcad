@@ -22,9 +22,9 @@ $this->title = 'AgendaAcad';
                     if(!Yii::$app->user->isGuest)
                         echo Html::a('Meu Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']);
                     else
-                        echo Html::a('Meu Calendário', ['login'], ['class' => 'btn btn-lg btn-success']);
+                        echo Html::a('Login', ['login'], ['class' => 'btn btn-lg btn-success']);
                 ?>
-                <?= Html::a('Tutorial', ['http:\\www.youtube.com'], ['class' => 'btn btn-lg btn-success']) ?>
+                <?= Html::a('Cadastrar', ['usuario\create'], ['class' => 'btn btn-lg btn-success']) ?>
             </p>
         </div>
 
