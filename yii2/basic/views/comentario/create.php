@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comentario */
 
-$this->title = 'Create Comentario';
-$this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
+$this->title = 'Criar Comentario';
+$this->params['breadcrumbs'][] = ['label' => 'Comentários', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comentario-create">

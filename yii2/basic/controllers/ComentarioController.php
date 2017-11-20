@@ -72,7 +72,7 @@ class ComentarioController extends Controller
             $model->data_comentario = date('y-m-d h:m:s');
 
             $model->save();
-            return $this->redirect(['index', 'id' => $model->id_comentario]);
+            return $this->redirect(['index', 'id_evento' => $model->id_evento]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -91,7 +91,7 @@ class ComentarioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_comentario]);
+            return $this->redirect(['index', 'id_evento' => $model->id_evento]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -107,9 +107,10 @@ class ComentarioController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'id_evento' => $model->id_evento]);
     }
 
     /**
