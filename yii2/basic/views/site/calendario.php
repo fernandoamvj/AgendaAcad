@@ -19,9 +19,17 @@ $this->title = 'Calendário';
     </p>
 
     <p>
+    <h2>Gerenciar Inscrições </h2>
+    <br>
+    <?= Html::a('Adicionar/Remover Alunos', ['inscricao/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <br>
+    <br>
+    </p>
+
+    <p>
     <h2>Disciplina </h2>
     <br>
-    <?= Html::a('Ver Disciplinas', ['disciplina/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Ver Minhas Disciplinas', ['disciplina/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 

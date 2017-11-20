@@ -29,7 +29,7 @@ $this->title = 'Calendário';
     <p>
     <h2>Disciplina </h2>
     <br>
-    <?= Html::a('Inscrever Disciplina', ['inscricao/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Inscrever em Disciplina', ['inscricao/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 
