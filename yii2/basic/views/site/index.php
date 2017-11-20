@@ -18,7 +18,12 @@ $this->title = 'AgendaAcad';
         <div class=" col-md-12">
             <p class="lead">Aqui voce poderá ver todos os seus compromissos e agendamentos do CEFET!</p>
 
-                <?= Html::a('Meu Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+                <?php
+                    if(!Yii::$app->user->isGuest)
+                        echo Html::a('Meu Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']);
+                    else
+                        echo Html::a('Meu Calendário', ['login'], ['class' => 'btn btn-lg btn-success']);
+                ?>
                 <?= Html::a('Tutorial', ['http:\\www.youtube.com'], ['class' => 'btn btn-lg btn-success']) ?>
             </p>
         </div>
