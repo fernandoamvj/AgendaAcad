@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comentario */
 
-$this->title = 'Update Comentário: ' . $model->id_comentario;
+$this->title = 'Atualizar Comentário: ' . $model->id_comentario;
 $this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_comentario, 'url' => ['view', 'id' => $model->id_comentario]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="comentario-update">
 

@@ -33,10 +33,12 @@ class ComentarioController extends Controller
      * Lists all Comentario models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id_evento)
     {
         $searchModel = new ComentarioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider->query->filterWhere(['id_evento' => $id_evento]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
