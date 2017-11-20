@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'comentario',
             'data_comentario',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{view}' ],
         ],
     ]); ?>
 </div>
