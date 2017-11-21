@@ -21,7 +21,7 @@ $this->title = 'Calendário';
     <p>
     <h2>Eventos </h2>
     <br>
-    <?= Html::a('Ver Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Meu Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     <br>
     </p>
@@ -29,7 +29,7 @@ $this->title = 'Calendário';
     <p>
     <h2>Disciplina </h2>
     <br>
-    <?= Html::a('Inscrever Disciplina', ['inscricao/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Inscrever em Disciplina', ['inscricao/index'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 

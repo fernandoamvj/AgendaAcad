@@ -7,8 +7,16 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\InscricaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inscrição';
+if(Yii::$app->user->identity->tipo==2) { //professor
+    $titulo_create = 'Adicionar aluno em disciplina';
+    $this->title = 'Gerenciar Inscrições';
+}else {                                    //n é
+    $titulo_create = 'Criar Inscrição';
+    $this->title = 'Inscrição';
+}
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 
 <div class="inscricao-index">
@@ -17,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Criar Inscrição', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a($titulo_create, ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'codigo',
+            //'codigo',
             'id_disciplina',
             'id_usuario',
 

@@ -106,7 +106,7 @@ class ActionColumn extends Column
      * ```
      * @since 2.0.7
      */
-    public $visibleButtons = [];
+    public $visibleButtons = ['view'];
     /**
      * @var callable a callback that creates a button URL using the specified model information.
      * The signature of the callback should be the same as that of [[createUrl()]]

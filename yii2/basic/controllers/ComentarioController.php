@@ -33,10 +33,12 @@ class ComentarioController extends Controller
      * Lists all Comentario models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id_evento)
     {
         $searchModel = new ComentarioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider->query->filterWhere(['id_evento' => $id_evento]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -70,7 +72,7 @@ class ComentarioController extends Controller
             $model->data_comentario = date('y-m-d h:m:s');
 
             $model->save();
-            return $this->redirect(['index', 'id' => $model->id_comentario]);
+            return $this->redirect(['view', 'id' => $model->id_comentario]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -105,9 +107,10 @@ class ComentarioController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'id_evento' => $model->id_evento]);
     }
 
     /**
