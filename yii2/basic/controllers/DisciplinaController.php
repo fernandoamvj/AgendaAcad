@@ -125,6 +125,7 @@ class DisciplinaController extends Controller
     {
         $this->findModel($id)->delete();
 
+        $this->trigger();
         return $this->redirect(['index']);
     }
 

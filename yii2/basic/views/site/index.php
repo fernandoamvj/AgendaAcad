@@ -24,7 +24,7 @@ $this->title = 'AgendaAcad';
                     else
                         echo Html::a('Login', ['login'], ['class' => 'btn btn-lg btn-success']);
                 ?>
-                <?= Html::a('Cadastrar', ['usuario\create'], ['class' => 'btn btn-lg btn-success']) ?>
+                <?= Html::a('Tutorial', 'http://www.youtube.com', ['class' => 'btn btn-lg btn-success']) ?>
             </p>
         </div>
 
