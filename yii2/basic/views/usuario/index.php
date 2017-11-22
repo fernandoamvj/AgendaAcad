@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+//se Yii;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuarioSearch */
@@ -21,11 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'codigo',
             'nome',
             'email:email',
-            'tipo',
             'senha',
 
             ['class' => 'yii\grid\ActionColumn'],
