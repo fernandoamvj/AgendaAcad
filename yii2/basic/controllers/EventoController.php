@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Comentario;
 use app\models\Disciplina;
+use app\models\NewModel;
 use app\models\Usuario;
 use Yii;
 use app\models\Evento;
@@ -42,78 +43,82 @@ class EventoController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Evento();
-        $searchModel = new EventoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $NewModel = new NewModel();
+        if($NewModel->load(Yii::$app->request->post())){
 
-        $eventos_criados = Evento::find()
-            ->select('evento.*')
-            ->from('evento')
-            ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
-        $eventos_inscricao_disciplina = Evento::find()
-            ->select('evento.*')
-            ->from('inscricao')
-            ->innerJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
-            ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
-        $eventos_professor_monitor_disciplina = Evento::find()
-            ->select('evento.*')
-            ->from('disciplina')
-            ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
-            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
-            ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+            return $this->redirect(['view', 'id' => $NewModel->id_evento]);
+        } else {
+            $searchModel = new EventoSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        //aqui sao os eventos a serem exibidos no calendario
-        $eventos_visualizaveis = $eventos_criados->union($eventos_inscricao_disciplina)->union($eventos_professor_monitor_disciplina)->all();
-
-        foreach($eventos_visualizaveis as $evento){
-            $Event = new \yii2fullcalendar\models\Event();
-            $Event->id = 1;
-            $Event->title = $evento->nome;
-            $Event->start = date($evento->data);
-            $Event->url = 'http://localhost/AgendaAcad/yii2/basic/web/index.php?r=evento%2Fview&id='.$evento->id_evento;
-            if($evento->id_usuario == Yii::$app->user->identity->codigo)
-                $Event->color = 'yellow';
-            else
-                $Event->color = 'blue';
-            $Event->description = $evento->descricao;
-            $eventos_visualizaveis[] = $Event;
-        }
-
-
-        if(!Yii::$app->user->isGuest) {
-            $eventos_criados2 = Evento::find()
+            $eventos_criados = Evento::find()
                 ->select('evento.*')
                 ->from('evento')
                 ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
-            $eventos_professor_monitor_disciplina2 = Evento::find()
+            $eventos_inscricao_disciplina = Evento::find()
+                ->select('evento.*')
+                ->from('inscricao')
+                ->innerJoin('evento', 'inscricao.id_disciplina = evento.id_disciplina', [])
+                ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+            $eventos_professor_monitor_disciplina = Evento::find()
                 ->select('evento.*')
                 ->from('disciplina')
-                ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
+                ->innerJoin('evento', 'disciplina.idDisciplina = evento.id_disciplina', [])
                 ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
                 ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
 
-            //aqui sao os eventos a serem exibidos na lista logo abaixo, eles podem ser editados
-            $eventos_editaveis = $eventos_criados2;
+            //aqui sao os eventos a serem exibidos no calendario
+            $eventos_visualizaveis = $eventos_criados->union($eventos_inscricao_disciplina)->union($eventos_professor_monitor_disciplina)->all();
 
-            if($eventos_professor_monitor_disciplina2->count()>0)
-                $eventos_editaveis->union($eventos_professor_monitor_disciplina2);
+            foreach ($eventos_visualizaveis as $evento) {
+                $Event = new \yii2fullcalendar\models\Event();
+                $Event->id = 1;
+                $Event->title = $evento->nome;
+                $Event->start = date($evento->data);
+                $Event->url = 'http://localhost/AgendaAcad/yii2/basic/web/index.php?r=evento%2Fview&id=' . $evento->id_evento;
+                if ($evento->id_usuario == Yii::$app->user->identity->codigo)
+                    $Event->color = 'yellow';
+                else
+                    $Event->color = 'blue';
+                $Event->description = $evento->descricao;
+                $eventos_visualizaveis[] = $Event;
+            }
 
 
-            $dataProvider = new ActiveDataProvider([
-                'query' => $eventos_editaveis,
+            if (!Yii::$app->user->isGuest) {
+                $eventos_criados2 = Evento::find()
+                    ->select('evento.*')
+                    ->from('evento')
+                    ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+                $eventos_professor_monitor_disciplina2 = Evento::find()
+                    ->select('evento.*')
+                    ->from('disciplina')
+                    ->innerJoin('evento', 'disciplina.idDisciplina = evento.id_disciplina', [])
+                    ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
+                    ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+
+                //aqui sao os eventos a serem exibidos na lista logo abaixo, eles podem ser editados
+                $eventos_editaveis = $eventos_criados2;
+
+                if ($eventos_professor_monitor_disciplina2->count() > 0)
+                    $eventos_editaveis->union($eventos_professor_monitor_disciplina2);
+
+
+                $dataProvider = new ActiveDataProvider([
+                    'query' => $eventos_editaveis,
+                ]);
+
+            } else {
+                $dataProvider->query->filterWhere(['id_usuario' => 0]);
+            }
+
+            return $this->render('index', [
+                'NewModel' => $NewModel,
+                'events' => $eventos_visualizaveis,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
             ]);
-
-        }else{
-            $dataProvider->query->filterWhere(['id_usuario' => 0]);
         }
-
-        return $this->render('index', [
-            'model' => $model,
-            'events' => $eventos_visualizaveis,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-
-        ]);
     }
 
     /**
@@ -169,7 +174,7 @@ class EventoController extends Controller
             }
 
             $model->save();
-            return $this->redirect(['index', 'id' => $model->id_evento]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

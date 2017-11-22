@@ -8,7 +8,7 @@ use app\models\Disciplina;
 
 $this->title = 'Evento: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Eventos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->nome;
 ?>
 <div class="evento-view">
 

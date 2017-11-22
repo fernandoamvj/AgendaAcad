@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
     <?php
-    $eventos_criados2 = Evento::find()
+        $eventos_criados2 = Evento::find()
             ->select(['evento.nome','evento.id_evento'])
             ->from('evento')
             ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
@@ -43,8 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //aqui sao os eventos a serem exibidos no calendario
         $eventos_visualizaveis2 = $eventos_criados2->union($eventos_inscricao_disciplina2)->union($eventos_professor_monitor_disciplina2)->all();
 
-    ?>
-    <?= $form->field($model, 'id_evento')->label('Evento',[])->widget(Select2::classname(), [
+        echo $form->field($NewModel, 'id_evento')->label('Evento',[])->widget(Select2::classname(), [
             'data' => ArrayHelper::map($eventos_visualizaveis2,'id_evento','nome'),
             'language' => 'pt',
             'options' => ['placeholder' => 'Selecione Evento ... '],
@@ -52,11 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'allowClear' => true
             ],
         ]);
+
+        echo Html::submitButton('Acessar Evento', ['class' => 'btn btn-success']);
     ?>
 
-    <?= Html::a('Acessar Evento', ['view', 'id' => $model->id_evento], ['class' => 'btn btn-success']); ?>
+    <?php ActiveForm::end(); ?>
 
-    <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
