@@ -13,6 +13,9 @@ use app\models\Evento;
 
 $this->title = 'Calendário';
 $title2 = 'Eventos que você tem permissão pra editar';
+
+$form = ActiveForm::begin();
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="evento-index">
@@ -20,6 +23,39 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+    <?php
+    $eventos_criados2 = Evento::find()
+            ->select(['evento.nome','evento.id_evento'])
+            ->from('evento')
+            ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+        $eventos_inscricao_disciplina2 = Evento::find()
+            ->select(['evento.nome','evento.id_evento'])
+            ->from('inscricao')
+            ->innerJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
+            ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+        $eventos_professor_monitor_disciplina2 = Evento::find()
+            ->select(['evento.nome','evento.id_evento'])
+            ->from('disciplina')
+            ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
+            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
+            ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+
+        //aqui sao os eventos a serem exibidos no calendario
+        $eventos_visualizaveis2 = $eventos_criados2->union($eventos_inscricao_disciplina2)->union($eventos_professor_monitor_disciplina2)->all();
+
+    ?>
+    <?= $form->field($model, 'id_evento')->label('Evento',[])->widget(Select2::classname(), [
+            'data' => ArrayHelper::map($eventos_visualizaveis2,'id_evento','nome'),
+            'language' => 'pt',
+            'options' => ['placeholder' => 'Selecione Evento ... '],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
+
+    <?= Html::a('Acessar Evento', ['view', 'id' => $model->id_evento], ['class' => 'btn btn-success']); ?>
+
     <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -71,6 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 
     <br>
     <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [

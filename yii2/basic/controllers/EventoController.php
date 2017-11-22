@@ -42,6 +42,7 @@ class EventoController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Evento();
         $searchModel = new EventoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -107,6 +108,7 @@ class EventoController extends Controller
         }
 
         return $this->render('index', [
+            'model' => $model,
             'events' => $eventos_visualizaveis,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
