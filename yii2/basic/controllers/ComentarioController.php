@@ -41,6 +41,7 @@ class ComentarioController extends Controller
         $dataProvider->query->filterWhere(['id_evento' => $id_evento]);
 
         return $this->render('index', [
+            'id_evento' => $id_evento,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -63,14 +64,14 @@ class ComentarioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id_evento)
     {
         $model = new Comentario();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->id_usuario=Yii::$app->user->identity->codigo;
             $model->data_comentario = date('y-m-d h:m:s');
-
+            $model->id_evento = $id_evento;
             $model->save();
             return $this->redirect(['view', 'id' => $model->id_comentario]);
         } else {

@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
 $this->title = 'Comentário: ' . $model->id_comentario;
 $this->params['breadcrumbs'][] = ['label' => 'Comentários', 'url' => ['index', 'id_evento' => $model->id_evento]];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->id_comentario;
 ?>
 <div class="comentario-view">
 
