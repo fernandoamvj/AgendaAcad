@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
              'value'=>'idMonitor.nome',
              ],
             
-            
             'datainicio',
             'datafim',
 

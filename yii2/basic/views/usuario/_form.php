@@ -25,10 +25,6 @@ use yii\widgets\ActiveForm;
         </select>
     </div>
     <?= $form->field($model, 'senha')->textInput(['maxlength' => true,'type'=>'password']) ?>
-    <!--<div class="form-group field-usuario-senha required has-error">
-        <label class="control-label" for="usuario-senha">Confirmar senha</label>
-        <input type="password" id="confirmar-senha" class="form-control" maxlength="32" aria-required="true" aria-invalid="true">
-    </div>-->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -29,9 +29,9 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'hora')->textInput(['type'=> 'time']) ?>
 
-    <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descricao')->label('Descrição',[])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_disciplina')->dropDownList(ArrayHelper::map(Disciplina::find()->where(['id_professor' => Yii::$app->user->identity->codigo])->orWhere(['id_monitor' => Yii::$app->user->identity->codigo])->all(),'idDisciplina','nome_disciplina'),['prompt'=>'Selecione Disciplina']
+    <?= $form->field($model, 'id_disciplina')->label('Disciplina',[])->dropDownList(ArrayHelper::map(Disciplina::find()->where(['id_professor' => Yii::$app->user->identity->codigo])->orWhere(['id_monitor' => Yii::$app->user->identity->codigo])->all(),'idDisciplina','nome_disciplina'),['prompt'=>'Selecione Disciplina']
     ) ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>

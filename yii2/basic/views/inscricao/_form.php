@@ -18,7 +18,7 @@ use app\models\Usuario;
 
     <?php
             if(Yii::$app->user->identity->tipo==2)
-                    echo $form->field($model, 'id_usuario')->widget(Select2::classname(), [
+                    echo $form->field($model, 'id_usuario')->label('Aluno',[])->widget(Select2::classname(), [
                     'data' => ArrayHelper::map(Usuario::find()->where(['tipo' => 1])->all(),'codigo','nome'),
                     'language' => 'pt',
                     'options' => ['placeholder' => 'Selecione Aluno ... '],
@@ -28,10 +28,11 @@ use app\models\Usuario;
                 ]);
     ?>
 
-    <?= $form->field($model, 'id_disciplina')->widget(Select2::classname(), [
+    <?= $form->field($model, 'id_disciplina')->label('Disciplina',[])->widget(Select2::classname(), [
         'data' => ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome 
                                                     FROM disciplina 
-                                                    LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo',[])
+                                                    LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo '.
+                                                    ' WHERE disciplina.id_professor='.Yii::$app->user->id,[])
                                                     ->asArray()
                                                     ->all(),'idDisciplina', 'nome_disciplina', 'nome'),
         'language' => 'pt',

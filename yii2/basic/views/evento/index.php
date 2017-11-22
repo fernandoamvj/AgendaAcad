@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
+      'options' => [
+        'lang' => 'pt-br',
+      ],
     ));
      ?>
 
@@ -46,11 +49,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             //'id_evento',
+
             'nome',
             'descricao',
             'data',
             'hora',
+
             [
                 'label' => 'Discplina',
                 'attribute'=>'id_disciplina',

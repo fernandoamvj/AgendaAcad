@@ -13,15 +13,18 @@ $this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="usuario-update">
 
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <?php if(Yii::$app->user->id == $model->codigo){ ?>
+        <h1><?= Html::encode($this->title) ?></h1>
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-    <br>
-    <?= Html::a('Remover Eventos Cadastrados', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
-    <br>
+        <br>
+        <?= Html::a('Remover Eventos Cadastrados', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+        <br>
+    <?php }else{ ?>
+    <div class="alert alert-danger">
+        <strong><?php echo "Sem permissão para editar."; ?></strong>
+     </div>
+    <?php } ?>
 
 </div>
