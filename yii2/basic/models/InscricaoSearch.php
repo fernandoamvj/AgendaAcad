@@ -18,7 +18,8 @@ class InscricaoSearch extends Inscricao
     public function rules()
     {
         return [
-            [['codigo', 'id_disciplina', 'id_usuario'], 'integer'],
+            [['codigo', 'id_usuario'], 'integer'],
+            [['id_disciplina'],'safe'],
         ];
     }
 
@@ -55,12 +56,16 @@ class InscricaoSearch extends Inscricao
             // $query->where('0=1');
             return $dataProvider;
         }
+        $query->joinWith('idDisciplina');
 
         // grid filtering conditions
         $query->andFilterWhere([
             'codigo' => $this->codigo,
-            'id_disciplina' => $this->id_disciplina,
             'id_usuario' => $this->id_usuario,
+            'id_disciplina' => $this->id_disciplina,
+        ]);
+
+        $query->andFilterWhere(['like', 'disciplina.nome_disciplina', $this->id_disciplina
         ]);
 
         return $dataProvider;

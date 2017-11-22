@@ -18,8 +18,8 @@ class ComentarioSearch extends Comentario
     public function rules()
     {
         return [
-            [['id_comentario', 'id_evento', 'id_usuario'], 'integer'],
-            [['comentario', 'data_comentario'], 'safe'],
+            [['id_comentario'], 'integer'],
+            [['comentario', 'data_comentario', 'id_usuario', 'id_evento'], 'safe'],
         ];
     }
 
@@ -57,6 +57,9 @@ class ComentarioSearch extends Comentario
             return $dataProvider;
         }
 
+        $query->joinWith('idUsuario');
+        //$query->joinWith('idEvento');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id_comentario' => $this->id_comentario,
@@ -66,6 +69,11 @@ class ComentarioSearch extends Comentario
         ]);
 
         $query->andFilterWhere(['like', 'comentario', $this->comentario]);
+
+        $query->andFilterWhere(['like', 'usuario.nome', $this->id_usuario
+        ]);
+       $query->andFilterWhere(['like', 'evento.nome', $this->id_evento
+        ]);
 
         return $dataProvider;
     }

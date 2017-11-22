@@ -33,13 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             [
                 'attribute'=>'id_disciplina',
                 'value'=>'idDisciplina.nome_disciplina'
             ],
-            ['label' => ' Professor',
-             'attribute' => 'idDisciplina.idProfessor.nome',
-             ],
+            ['label' => ' Aluno',
+             'attribute' => 'idUsuario.nome',
+             ],                    
 
             ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}']
         ],

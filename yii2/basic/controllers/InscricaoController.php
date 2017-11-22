@@ -58,6 +58,14 @@ class InscricaoController extends Controller
         }else{
             $dataProvider->query->filterWhere(['id_usuario' => 0]);
         }
+
+        if(Yii::$app->user->identity->tipo==2){
+            return $this->render('index2', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

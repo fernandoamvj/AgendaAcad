@@ -24,9 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_comentario',
-            'id_evento',
-            'id_usuario',
+            //'id_comentario',
+            ['label' => 'Evento',
+             'attribute'=>'id_evento',
+             'value'=>'idEvento.nome',
+            ],
+            ['label' => 'Usuario',
+             'attribute'=>'id_usuario',
+             'value' => 'idUsuario.nome',
+            ],
+            
             'comentario',
             'data_comentario',
 

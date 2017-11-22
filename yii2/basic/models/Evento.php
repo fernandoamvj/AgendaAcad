@@ -78,6 +78,12 @@ class Evento extends \yii\db\ActiveRecord
         return $this->hasOne(Disciplina::className(), ['idDisciplina' => 'id_disciplina']);
     }
 
+    public function getIdUsuario()
+    {
+        return $this->hasOne(Usuario::className(), ['codigo' => 'id_usuario']);
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

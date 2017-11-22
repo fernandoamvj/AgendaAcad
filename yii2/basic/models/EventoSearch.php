@@ -18,8 +18,8 @@ class EventoSearch extends Evento
     public function rules()
     {
         return [
-            [['id_evento', 'id_disciplina', 'id_usuario'], 'integer'],
-            [['data', 'hora', 'descricao', 'nome', 'tipo'], 'safe'],
+            [['id_evento',  'id_usuario'], 'integer'],
+            [['data', 'hora', 'descricao', 'nome','id_disciplina', 'tipo'], 'safe'],
         ];
     }
 
@@ -57,6 +57,7 @@ class EventoSearch extends Evento
             return $dataProvider;
         }
 
+        $query->joinWith('idDisciplina');
         // grid filtering conditions
         $query->andFilterWhere([
             'id_evento' => $this->id_evento,
@@ -69,6 +70,9 @@ class EventoSearch extends Evento
         $query->andFilterWhere(['like', 'descricao', $this->descricao])
             ->andFilterWhere(['like', 'nome', $this->nome])
             ->andFilterWhere(['like', 'tipo', $this->tipo]);
+
+        $query->andFilterWhere(['like', 'disciplina.nome_disciplina', $this->id_disciplina
+        ]);
 
         return $dataProvider;
     }

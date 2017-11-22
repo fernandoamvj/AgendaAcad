@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\NotificaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Notificacaos';
+$this->title = 'Notificações';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="notificacao-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Criar Notificacao', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Notificações', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_notificacao',
-            'id_evento',
+            //'id_notificacao',
+            
             'data_hora_notificacao',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -18,8 +18,8 @@ class DisciplinaSearch extends Disciplina
     public function rules()
     {
         return [
-            [['idDisciplina', 'id_professor', 'id_monitor'], 'integer'],
-            [['nome_disciplina', 'datainicio', 'datafim'], 'safe'],
+            [['idDisciplina', 'id_professor'], 'integer'],
+            [['nome_disciplina', 'datainicio', 'datafim', 'id_monitor'], 'safe'],
         ];
     }
 
@@ -57,6 +57,7 @@ class DisciplinaSearch extends Disciplina
             return $dataProvider;
         }
 
+        $query->joinWith('idMonitor');
         // grid filtering conditions
         $query->andFilterWhere([
             'idDisciplina' => $this->idDisciplina,
@@ -67,6 +68,8 @@ class DisciplinaSearch extends Disciplina
         ]);
 
         $query->andFilterWhere(['like', 'nome_disciplina', $this->nome_disciplina]);
+        $query->andFilterWhere(['like', 'usuario.nome', $this->id_monitor
+        ]);
 
         return $dataProvider;
     }

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Disciplina;
 use yii\helpers\ArrayHelper;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Evento */
@@ -14,7 +15,17 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'data')->textInput(['type'=>'date']) ?>
+    <?= $form->field($model, 'data')->widget(
+        DatePicker::className(), [
+            // inline too, not bad
+             'inline' => false, 
+             // modify template for custom rendering
+            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+            'clientOptions' => [
+                'autoclose' => false,
+                'format' => 'yyyy-mm-dd'
+            ]
+    ]); ?>
 
     <?= $form->field($model, 'hora')->textInput(['type'=> 'time']) ?>
 

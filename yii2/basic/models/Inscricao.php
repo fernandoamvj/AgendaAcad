@@ -44,7 +44,7 @@ class Inscricao extends \yii\db\ActiveRecord
     {
         return [
             'codigo' => 'Codigo',
-            'id_disciplina' => 'Id Disciplina',
+            'id_disciplina' => 'Nome da Disciplina ',
             'id_usuario' => 'Id Usuario',
         ];
     }
