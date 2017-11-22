@@ -120,7 +120,7 @@ class ComentarioController extends Controller
      * @return Comentario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Comentario::findOne($id)) !== null) {
             return $model;

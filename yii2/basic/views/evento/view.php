@@ -6,7 +6,7 @@ use app\models\Disciplina;
 /* @var $this yii\web\View */
 /* @var $model app\models\Evento */
 
-$this->title = $model->nome;
+$this->title = 'Evento: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Eventos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

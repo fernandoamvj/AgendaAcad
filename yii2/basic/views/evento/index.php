@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'hora',
 
             [
-                'label' => 'Discplina',
+                'label' => 'Disciplina',
                 'attribute'=>'id_disciplina',
                 'value'=>'idDisciplina.nome_disciplina'
             ],
@@ -71,5 +71,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+    <br>
+    <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [
+        'class' => 'btn btn-danger',
+        'data' => [
+            'confirm' => 'Tem certeza de que quer excluir?',
+            'method' => 'post',
+        ],
+    ]) ?>
+    <br>
 
 </div>

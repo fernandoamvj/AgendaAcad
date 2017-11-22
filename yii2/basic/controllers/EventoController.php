@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Comentario;
 use app\models\Disciplina;
 use app\models\Usuario;
 use Yii;
@@ -250,5 +251,28 @@ class EventoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionExcluireventos()
+    {
+        $ids_evento = Evento::find()
+                ->select('id_evento')
+                ->where(['id_usuario' => Yii::$app->user->identity->codigo])
+                ->asArray()
+                ->all();
+
+        foreach($ids_evento as $id_evento) {
+            $ids_comentario = Comentario::find()
+                            ->select('id_comentario')
+                            ->where(['id_evento' => $id_evento])
+                            ->asArray()
+                            ->all();
+            foreach($ids_comentario as $id_comentario)
+                ComentarioController::findModel($id_comentario)->delete();
+
+            $this->findModel($id_evento)->delete();
+
+        }
+        return $this->redirect(['index']);
     }
 }

@@ -18,7 +18,6 @@ use Yii;
  * @property Disciplina[] $disciplinas0
  * @property Inscricao[] $inscricaos
  * @property Tipousuario $tipo0
- * @property Usuarioevento[] $usuarioeventos
  */
 class Usuario extends \yii\db\ActiveRecord
 {
@@ -99,11 +98,4 @@ class Usuario extends \yii\db\ActiveRecord
         return $this->hasOne(TipoUsuario::className(), ['id_tipo_usuario' => 'tipo']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsuarioeventos()
-    {
-        return $this->hasMany(UsuarioEvento::className(), ['id_usuario' => 'codigo']);
-    }
 }
