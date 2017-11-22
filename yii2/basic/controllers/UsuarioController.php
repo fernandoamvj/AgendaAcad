@@ -2,10 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Evento;
 use Yii;
 use app\models\Usuario;
 use app\models\UsuarioSearch;
 use app\models\TipoUsuarioSearch;
+use yii\base\Event;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -116,6 +118,15 @@ class UsuarioController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionExcluirEventos($codigo)
+    {
+        $ids_evento = Evento::find()->select('id_evento')->where(['id_usuario' => $codigo])->asArray()->all();
+        foreach($ids_evento as $id_evento){
+            Evento::findModel($id_evento)->delete();
+            UsuarioEvento::findModel($id_evento)->delete();
+        }
+        return $this->redirect(['index']);
+    }
     /**
      * Finds the Usuario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

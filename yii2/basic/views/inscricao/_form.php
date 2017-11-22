@@ -28,19 +28,36 @@ use app\models\Usuario;
                 ]);
     ?>
 
-    <?= $form->field($model, 'id_disciplina')->label('Disciplina',[])->widget(Select2::classname(), [
-        'data' => ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome 
-                                                    FROM disciplina 
-                                                    LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo '.
-                                                    ' WHERE disciplina.id_professor='.Yii::$app->user->id,[])
-                                                    ->asArray()
-                                                    ->all(),'idDisciplina', 'nome_disciplina', 'nome'),
-        'language' => 'pt',
-        'options' => ['placeholder' => 'Digite a materia  ... '],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
+    <?php
+    if(Yii::$app->user->identity->tipo==2){
+        echo $form->field($model, 'id_disciplina')->label('Disciplina',[])->widget(Select2::classname(), [
+            'data' => ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome 
+                                                        FROM disciplina 
+                                                        LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo '.
+                                                        ' WHERE disciplina.id_professor='.Yii::$app->user->id,[])
+                                                        ->asArray()
+                                                        ->all(),'idDisciplina', 'nome_disciplina', 'nome'),
+            'language' => 'pt',
+            'options' => ['placeholder' => 'Digite a materia  ... '],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    } else {
+        echo $form->field($model, 'id_disciplina')->label('Disciplina',[])->widget(Select2::classname(), [
+            'data' => ArrayHelper::map(Disciplina::findBySql('SELECT disciplina.idDisciplina, disciplina.nome_disciplina, usuario.nome 
+                                                        FROM disciplina 
+                                                        LEFT JOIN usuario ON disciplina.id_professor = usuario.codigo',[])
+                ->asArray()
+                ->all(),'idDisciplina', 'nome_disciplina', 'nome'),
+            'language' => 'pt',
+            'options' => ['placeholder' => 'Digite a materia  ... '],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    }
+    ?>
 
 
     <div class="form-group">

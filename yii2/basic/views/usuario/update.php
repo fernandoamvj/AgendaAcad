@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Atualizar';
         'model' => $model,
     ]) ?>
         <br>
-        <?= Html::a('Remover Eventos Cadastrados', ['evento/index'], ['class' => 'btn btn-lg btn-success']) ?>
+        <?= Html::a('Remover Eventos Cadastrados', ['excluirEventos', 'codigo' => $model->codigo], ['class' => 'btn btn-lg btn-success']) ?>
         <br>
     <?php }else{ ?>
     <div class="alert alert-danger">
