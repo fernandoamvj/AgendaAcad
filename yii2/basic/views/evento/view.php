@@ -6,9 +6,9 @@ use app\models\Disciplina;
 /* @var $this yii\web\View */
 /* @var $model app\models\Evento */
 
-$this->title = $model->nome;
+$this->title = 'Evento: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Eventos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->nome;
 ?>
 <div class="evento-view">
 
@@ -68,5 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <?= Html::a('Visualizar comentários', ['comentario/index', 'id_evento' => $model->id_evento], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Convidar Pessoas', ['convite/index', 'id_evento' => $model->id_evento], ['class' => 'btn btn-primary']) ?>
 
 </div>

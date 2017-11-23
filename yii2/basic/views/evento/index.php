@@ -15,6 +15,9 @@ use yii\helpers\Url;
 
 $this->title = 'Calendário';
 $title2 = 'Eventos que você tem permissão pra editar';
+
+$form = ActiveForm::begin();
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="evento-index">
@@ -32,6 +35,45 @@ $this->params['breadcrumbs'][] = $this->title;
             </a>
         </div>
     </div>
+    
+    <p>
+    <?php
+        $eventos_criados2 = Evento::find()
+            ->select(['evento.nome','evento.id_evento'])
+            ->from('evento')
+            ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+        $eventos_inscricao_disciplina2 = Evento::find()
+            ->select(['evento.nome','evento.id_evento'])
+            ->from('inscricao')
+            ->innerJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
+            ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+        $eventos_professor_monitor_disciplina2 = Evento::find()
+            ->select(['evento.nome','evento.id_evento'])
+            ->from('disciplina')
+            ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
+            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
+            ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+
+        //aqui sao os eventos a serem exibidos no calendario
+        $eventos_visualizaveis2 = $eventos_criados2->union($eventos_inscricao_disciplina2)->union($eventos_professor_monitor_disciplina2)->all();
+
+        echo $form->field($NewModel, 'id_evento')->label('Evento',[])->widget(Select2::classname(), [
+            'data' => ArrayHelper::map($eventos_visualizaveis2,'id_evento','nome'),
+            'language' => 'pt',
+            'options' => ['placeholder' => 'Selecione Evento ... '],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+
+        echo Html::submitButton('Acessar Evento', ['class' => 'btn btn-success']);
+    ?>
+
+    <?php ActiveForm::end(); ?>
+
+        <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+>>>>>>> 0a5fdde22c0ac741d21653b6c118e84494212b24
 
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
@@ -56,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -68,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'hora',
 
             [
-                'label' => 'Discplina',
+                'label' => 'Disciplina',
                 'attribute'=>'id_disciplina',
                 'value'=>'idDisciplina.nome_disciplina'
             ],
@@ -81,5 +123,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+
+    <br>
+    <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [
+        'class' => 'btn btn-danger',
+        'data' => [
+            'confirm' => 'Tem certeza de que quer excluir?',
+            'method' => 'post',
+        ],
+    ]) ?>
+    <br>
 
 </div>

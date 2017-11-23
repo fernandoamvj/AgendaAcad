@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Comentario */
+/* @var $model app\models\Convite */
 
-$this->title = 'Criar Comentario';
-$this->params['breadcrumbs'][] = ['label' => 'Comentários', 'url' => ['index', 'id_evento' => $id_evento]];
+$this->title = 'Create Convite';
+$this->params['breadcrumbs'][] = ['label' => 'Convites', 'url' => ['index', 'id_evento' => $id_evento]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="comentario-create">
+<div class="convite-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
