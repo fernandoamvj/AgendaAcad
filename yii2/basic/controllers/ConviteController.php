@@ -2,17 +2,19 @@
 
 namespace app\controllers;
 
+use app\models\Evento;
+use app\models\Usuario;
 use Yii;
-use app\models\Comentario;
-use app\models\ComentarioSearch;
+use app\models\Convite;
+use app\models\ConviteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ComentarioController implements the CRUD actions for Comentario model.
+ * ConviteController implements the CRUD actions for Convite model.
  */
-class ComentarioController extends Controller
+class ConviteController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,15 +32,16 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Lists all Comentario models.
+     * Lists all Convite models.
      * @return mixed
      */
     public function actionIndex($id_evento)
     {
-        $searchModel = new ComentarioSearch();
+        $searchModel = new ConviteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $dataProvider->query->filterWhere(['id_evento' => $id_evento]);
+
 
         return $this->render('index', [
             'id_evento' => $id_evento,
@@ -48,7 +51,7 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Displays a single Comentario model.
+     * Displays a single Convite model.
      * @param integer $id
      * @return mixed
      */
@@ -60,19 +63,27 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Creates a new Comentario model.
+     * Creates a new Convite model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($id_evento)
     {
-        $model = new Comentario();
+        $model = new Convite();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id_usuario=Yii::$app->user->identity->codigo;
-            $model->data_comentario = date('y-m-d h:m:s');
             $model->id_evento = $id_evento;
             $model->save();
+
+            $evento = Evento::findOne($model->id_evento);
+            $usuario = Usuario::findOne($model->id_usuario);
+            Yii::$app->mailer->compose()
+                ->setFrom('agendaacad17@gmail.com')
+                ->setTo($usuario->email)
+                ->setSubject('Convite para evento: ' . $evento->nome)
+                ->setTextBody("Informações: \nNome: " . $evento->nome . "\nData: " . $evento->data . "\nHora: " . $evento->hora . "\nTipo: " . $evento->tipo . "\nDescricao: " . $evento->descricao)
+                ->send();
+
             return $this->redirect(['index', 'id_evento' => $model->id_evento]);
         } else {
             return $this->render('create', [
@@ -83,7 +94,7 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Updates an existing Comentario model.
+     * Updates an existing Convite model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -102,7 +113,7 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Deletes an existing Comentario model.
+     * Deletes an existing Convite model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -116,15 +127,15 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Finds the Comentario model based on its primary key value.
+     * Finds the Convite model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Comentario the loaded model
+     * @return Convite the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function findModel($id)
+    protected function findModel($id)
     {
-        if (($model = Comentario::findOne($id)) !== null) {
+        if (($model = Convite::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('Esta página não existe.');

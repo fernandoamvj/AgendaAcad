@@ -131,7 +131,7 @@ class UsuarioController extends Controller
         if (($model = Usuario::findOne(['codigo' => $codigo, 'email' => $email])) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Esta página não existe.');
         }
     }
 }

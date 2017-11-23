@@ -68,5 +68,6 @@ $this->params['breadcrumbs'][] = $model->nome;
     ]) ?>
 
     <?= Html::a('Visualizar comentários', ['comentario/index', 'id_evento' => $model->id_evento], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Convidar Pessoas', ['convite/index', 'id_evento' => $model->id_evento], ['class' => 'btn btn-primary']) ?>
 
 </div>
