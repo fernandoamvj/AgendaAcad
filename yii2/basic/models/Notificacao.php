@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "notificacao".
  *
  * @property integer $id_notificacao
- * @property integer $id_evento
  * @property string $data_hora_notificacao
+ * @property integer $id_usuario
  *
- * @property Evento $idEvento
+ * @property Usuario $idUsuario
  */
 class Notificacao extends \yii\db\ActiveRecord
 {
@@ -29,10 +29,10 @@ class Notificacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_evento', 'data_hora_notificacao'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
-            [['id_evento'], 'integer'],
-            [['data_hora_notificacao'], 'safe'],
-            [['id_evento'], 'exist', 'skipOnError' => true, 'targetClass' => Evento::className(), 'targetAttribute' => ['id_evento' => 'id_evento']],
+            [['id_usuario'], 'required'],
+            [['id_usuario'], 'integer'],
+            [['data_hora_notificacao'], 'string', 'max' => 20],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'codigo']],
         ];
     }
 
@@ -43,16 +43,16 @@ class Notificacao extends \yii\db\ActiveRecord
     {
         return [
             'id_notificacao' => 'Id Notificacao',
-            'id_evento' => 'Id Evento',
-            'data_hora_notificacao' => 'Data Hora Notificacao',
+            'data_hora_notificacao' => 'Período de antecedência',
+            'id_usuario' => 'Id Usuario',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdEvento()
+    public function getIdUsuario()
     {
-        return $this->hasOne(Evento::className(), ['id_evento' => 'id_evento']);
+        return $this->hasOne(Usuario::className(), ['codigo' => 'id_usuario']);
     }
 }

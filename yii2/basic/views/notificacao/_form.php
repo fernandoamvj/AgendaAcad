@@ -11,8 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="notificacao-form">
 
     <?php $form = ActiveForm::begin(); ?>
-   <!-- echo Html::dropDownList('listname', $select, $sexes); -->
-
+  
     <?= $form->field($model, 'data_hora_notificacao')->dropDownList(['15 min' => '15 min antes', '30 min' => '30 min antes', '1 semana' => '1 semana antes',], ['prompt' => '---Selecione o período---']); ?>
 
     <div class="form-group">

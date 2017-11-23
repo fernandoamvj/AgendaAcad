@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\NotificaoSearch */
+/* @var $searchModel app\models\NotificacaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Notificações';
@@ -20,14 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id_notificacao',
-            
             'data_hora_notificacao',
-
+           
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

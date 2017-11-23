@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\NotificaoSearch */
+/* @var $model app\models\NotificacaoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,9 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_notificacao') ?>
 
-    <?= $form->field($model, 'id_evento') ?>
-
     <?= $form->field($model, 'data_hora_notificacao') ?>
+
+    <?= $form->field($model, 'id_usuario') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Notificacao;
-use app\models\NotificaoSearch;
+use app\models\NotificacaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class NotificacaoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new NotificaoSearch();
+        $searchModel = new NotificacaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,8 +65,10 @@ class NotificacaoController extends Controller
     {
         $model = new Notificacao();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id_notificacao]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_usuario = Yii::$app->user->identity->codigo;
+            $model->save();
+            return $this->redirect(['evento/index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

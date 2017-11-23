@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Notificacao;
 
 /**
- * NotificaoSearch represents the model behind the search form about `app\models\Notificacao`.
+ * NotificacaoSearch represents the model behind the search form about `app\models\Notificacao`.
  */
-class NotificaoSearch extends Notificacao
+class NotificacaoSearch extends Notificacao
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class NotificaoSearch extends Notificacao
     public function rules()
     {
         return [
-            [['id_notificacao', 'id_evento'], 'integer'],
+            [['id_notificacao', 'id_usuario'], 'integer'],
             [['data_hora_notificacao'], 'safe'],
         ];
     }
@@ -60,9 +60,10 @@ class NotificaoSearch extends Notificacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id_notificacao' => $this->id_notificacao,
-            'id_evento' => $this->id_evento,
-            'data_hora_notificacao' => $this->data_hora_notificacao,
+            'id_usuario' => $this->id_usuario,
         ]);
+
+        $query->andFilterWhere(['like', 'data_hora_notificacao', $this->data_hora_notificacao]);
 
         return $dataProvider;
     }
