@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use app\models\Evento;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EventoSearch */
@@ -19,9 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-    <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="row">
+        <div class="col-lg-11">
+            <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
+            </a>
+        </div>
+        <div class="col-lg-1">
+            <a>
+            <?= Html::a('Notificações', ['notificacao/create'], ['class' => 'btn btn-success']) ?>
+            </a>
+        </div>
+    </div>
 
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
