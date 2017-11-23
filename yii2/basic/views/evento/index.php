@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </a>
         </div>
     </div>
-    
+
     <p>
     <?php
         $eventos_criados2 = Evento::find()
@@ -73,7 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
->>>>>>> 0a5fdde22c0ac741d21653b6c118e84494212b24
 
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
       'events'=> $events,
