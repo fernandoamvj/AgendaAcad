@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-1">
             <a>
-            <?= Html::a('Notificações', ['notificacao/index'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Ativar Notificação', ['notificacao/ativar'], ['class' => 'btn btn-success']) ?>
             </a>
         </div>
     </div>
