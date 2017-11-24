@@ -11,10 +11,10 @@ use yii\widgets\ActiveForm;
 <div class="notificacao-form">
 
     <?php $form = ActiveForm::begin(); ?>
-  
-    <?= $form->field($model, 'data_hora_notificacao')->dropDownList(['15 min' => '15 min antes', '30 min' => '30 min antes', '1 semana' => '1 semana antes',], ['prompt' => '---Selecione o período---']); ?>
 
-    <div class="form-group">
+    <?= $form->field($model, 'periodo_antecedencia')->dropDownList(['15 min' => '15 min antes', '30 min' => '30 min antes', '1 semana' => '1 semana antes',], ['prompt' => '---Selecione o período---']); ?>
+
+     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

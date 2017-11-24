@@ -18,8 +18,8 @@ class NotificacaoSearch extends Notificacao
     public function rules()
     {
         return [
-            [['id_notificacao', 'id_usuario'], 'integer'],
-            [['data_hora_notificacao'], 'safe'],
+            [['id_usuario'], 'integer'],
+            [['periodo_antecedencia'], 'safe'],
         ];
     }
 
@@ -59,11 +59,10 @@ class NotificacaoSearch extends Notificacao
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_notificacao' => $this->id_notificacao,
             'id_usuario' => $this->id_usuario,
         ]);
 
-        $query->andFilterWhere(['like', 'data_hora_notificacao', $this->data_hora_notificacao]);
+        $query->andFilterWhere(['like', 'periodo_antecedencia', $this->periodo_antecedencia]);
 
         return $dataProvider;
     }

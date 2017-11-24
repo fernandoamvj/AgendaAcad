@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Notificacao */
 
-$this->title = $model->id_notificacao;
+$this->title = 'Notificação';
 $this->params['breadcrumbs'][] = ['label' => 'Notificações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Atualizar informações', ['update', 'id' => $model->id_notificacao], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Excluir', ['delete', 'id' => $model->id_notificacao], [
+        <?= Html::a('Atualizar informações', ['update', 'id' => $model->id_usuario], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Excluir', ['delete', 'id' => $model->id_usuario], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Tem certeza de que quer excluir?',
@@ -28,9 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id_notificacao',
-            'data_hora_notificacao',
-            'id_usuario',
+            'periodo_antecedencia',
         ],
     ]) ?>
 

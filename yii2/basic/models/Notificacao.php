@@ -7,9 +7,8 @@ use Yii;
 /**
  * This is the model class for table "notificacao".
  *
- * @property integer $id_notificacao
- * @property string $data_hora_notificacao
  * @property integer $id_usuario
+ * @property string $periodo_antecedencia
  *
  * @property Usuario $idUsuario
  */
@@ -29,9 +28,9 @@ class Notificacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario'], 'required'],
+            [['id_usuario', 'periodo_antecedencia'], 'required'],
             [['id_usuario'], 'integer'],
-            [['data_hora_notificacao'], 'string', 'max' => 20],
+            [['periodo_antecedencia'], 'string', 'max' => 20],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'codigo']],
         ];
     }
@@ -42,9 +41,8 @@ class Notificacao extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_notificacao' => 'Id Notificacao',
-            'data_hora_notificacao' => 'Período de antecedência',
             'id_usuario' => 'Id Usuario',
+            'periodo_antecedencia' => 'Periodo Antecedencia',
         ];
     }
 

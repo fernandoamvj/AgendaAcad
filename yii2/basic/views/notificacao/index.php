@@ -15,17 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Criar Notificações', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php 
+        # Verifica se já cadastrou alguma notificação para que o botão de criar só apareça se não cadastrou notificação
+        if($dataProvider->totalCount == 0){
+            echo '<p>
+                <a href="index.php?r=notificacao/create" class = "btn btn-success">Criar Notificações</a>
+            </p>';
+    
+        }
+
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'data_hora_notificacao',
-           
+            'periodo_antecedencia',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

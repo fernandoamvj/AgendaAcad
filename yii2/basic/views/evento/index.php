@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-1">
             <a>
-            <?= Html::a('Notificações', ['notificacao/create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Notificações', ['notificacao/index'], ['class' => 'btn btn-success']) ?>
             </a>
         </div>
     </div>
@@ -122,7 +122,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
 
     <br>
     <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [
