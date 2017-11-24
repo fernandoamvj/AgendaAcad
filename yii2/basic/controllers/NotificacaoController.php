@@ -66,7 +66,7 @@ class NotificacaoController extends Controller
         $model = new Notificacao();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id_usuario = Yii::$app->user->identity->codigo;
+            $model->id_usuario = Yii::$app->user->getId();
             $model->save();
             return $this->redirect(['evento/index']);
         } else {

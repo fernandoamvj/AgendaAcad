@@ -69,7 +69,7 @@ class ComentarioController extends Controller
         $model = new Comentario();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id_usuario=Yii::$app->user->identity->codigo;
+            $model->id_usuario=Yii::$app->user->getId();
             $model->data_comentario = date('y-m-d h:m:s');
             $model->id_evento = $id_evento;
             $model->save();

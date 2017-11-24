@@ -41,7 +41,7 @@ class UsuarioController extends Controller
         $searchModel = new UsuarioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if(!Yii::$app->user->isGuest)
-            $dataProvider->query->filterWhere(['codigo' => Yii::$app->user->identity->codigo]);
+            $dataProvider->query->filterWhere(['codigo' => Yii::$app->user->getId()]);
         else
             $dataProvider->query->filterWhere(['codigo' => 0]);
         return $this->render('index', [

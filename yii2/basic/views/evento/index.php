@@ -41,18 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
         $eventos_criados2 = Evento::find()
             ->select(['evento.nome','evento.id_evento'])
             ->from('evento')
-            ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+            ->where(['evento.id_usuario' => Yii::$app->user->getId()]);
         $eventos_inscricao_disciplina2 = Evento::find()
             ->select(['evento.nome','evento.id_evento'])
             ->from('inscricao')
             ->innerJoin('evento','inscricao.id_disciplina = evento.id_disciplina',[])
-            ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+            ->where(['inscricao.id_usuario' => Yii::$app->user->getId()]);
         $eventos_professor_monitor_disciplina2 = Evento::find()
             ->select(['evento.nome','evento.id_evento'])
             ->from('disciplina')
             ->innerJoin('evento','disciplina.idDisciplina = evento.id_disciplina',[])
-            ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
-            ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+            ->where(['disciplina.id_monitor' => Yii::$app->user->getId()])
+            ->orWhere(['disciplina.id_professor' => Yii::$app->user->getId()]);
 
         //aqui sao os eventos a serem exibidos no calendario
         $eventos_visualizaveis2 = $eventos_criados2->union($eventos_inscricao_disciplina2)->union($eventos_professor_monitor_disciplina2)->all();

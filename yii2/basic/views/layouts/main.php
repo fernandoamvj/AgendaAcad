@@ -44,7 +44,7 @@ AppAsset::register($this);
                 Yii::$app->user->identity->tipo==2 ? (
                     ['label' => 'Menu', 'url' => ['site/calendario']]
                 ):(
-                    Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0 ? (
+                    Disciplina::find()->where(['id_monitor' => Yii::$app->user->getId()])->count() > 0 ? (
                         ['label' => 'Menu', 'url' => ['site/calendario3']]
                     ):(
                         ['label' => 'Menu', 'url' => ['site/calendario2']]

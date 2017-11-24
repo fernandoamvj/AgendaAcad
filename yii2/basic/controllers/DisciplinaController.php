@@ -46,10 +46,10 @@ class DisciplinaController extends Controller
         //$name = 'jhon';
      
         if(!Yii::$app->user->isGuest) {
-            if (Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
-                $dataProvider->query->filterWhere(['id_monitor' => 0]); /*Yii::$app->user->identity->codigo*/
+            if (Disciplina::find()->where(['id_monitor' => Yii::$app->user->getId()])->count() > 0)
+                $dataProvider->query->filterWhere(['id_monitor' => 0]); /*Yii::$app->user->getId()*/
             else if(Yii::$app->user->identity->tipo == 2)
-                $dataProvider->query->filterWhere(['id_professor' => Yii::$app->user->identity->codigo]);
+                $dataProvider->query->filterWhere(['id_professor' => Yii::$app->user->getId()]);
             else
                 $dataProvider->query->filterWhere(['id_monitor' => 0]);
         } else {
@@ -84,7 +84,7 @@ class DisciplinaController extends Controller
         $model = new Disciplina();
          
         if ($model->load(Yii::$app->request->post())) {
-            $model->id_professor = Yii::$app->user->identity->codigo;
+            $model->id_professor = Yii::$app->user->getId();
             $model->datainicio = date('y-m-d h:m:s');
             $model->save();
 
