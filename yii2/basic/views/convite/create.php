@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Convite */
 
-$this->title = 'Create Convite';
+$this->title = 'Enviar Convite';
 $this->params['breadcrumbs'][] = ['label' => 'Convites', 'url' => ['index', 'id_evento' => $id_evento]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

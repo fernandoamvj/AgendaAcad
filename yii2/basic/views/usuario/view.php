@@ -30,7 +30,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Minha Conta'];
             'codigo',
             'nome',
             'email:email',
-            'tipo',
+            [
+                'label' => 'Tipo',
+                'attribute'=>'tipo0.tipo'
+            ],
             'senha',
         ],
     ]) ?>

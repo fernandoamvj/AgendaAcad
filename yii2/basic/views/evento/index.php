@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]);
     ?>
+
     <div class="row">
         <div class="col-lg-11">
             <?= Html::submitButton('Acessar Evento', ['class' => 'btn btn-success']); ?>
@@ -124,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [
         'class' => 'btn btn-danger',
         'data' => [
-            'confirm' => 'Tem certeza de que quer excluir?',
+            'confirm' => 'Tem certeza de que quer excluir todos os eventos?',
             'method' => 'post',
         ],
     ]) ?>
