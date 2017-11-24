@@ -34,16 +34,9 @@ $this->title = 'Calendário';
     </p>
 
     <p>
-    <h2>Notificação </h2>
-    <br>
-    <?= Html::a('Notificação de Eventos Futuros', ['notificacao/index'], ['class' => 'btn btn-lg btn-success']) ?>
-    <br>
-    </p>
-
-    <p>
     <h2>Conta de Usuário </h2>
     <br>
-    <?= Html::a('Minha Conta', ['usuario/index'], ['class' => 'btn btn-lg btn-success']) ?>
+    <?= Html::a('Minha Conta', ['usuario/view'], ['class' => 'btn btn-lg btn-success']) ?>
     <br>
     </p>
 

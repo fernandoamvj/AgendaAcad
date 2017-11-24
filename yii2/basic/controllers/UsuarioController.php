@@ -56,10 +56,11 @@ class UsuarioController extends Controller
      * @param string $email
      * @return mixed
      */
-    public function actionView($codigo, $email)
+    public function actionView()
     {
+        $model = Usuario::findOne(['codigo' => Yii::$app->user->getId()]);
         return $this->render('view', [
-            'model' => $this->findModel($codigo, $email),
+            'model' => $this->findModel($model->codigo, $model->email),
         ]);
     }
 
@@ -115,7 +116,7 @@ class UsuarioController extends Controller
     {
         $this->findModel($codigo, $email)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['site/index']);
     }
 
     /**

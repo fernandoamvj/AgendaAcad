@@ -24,18 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="row">
-        <div class="col-lg-11">
-            <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
-            </a>
-        </div>
-        <div class="col-lg-1">
-            <a>
-            <?= Html::a('Ativar Notificação', ['notificacao/ativar'], ['class' => 'btn btn-success']) ?>
-            </a>
-        </div>
-    </div>
-
     <p>
     <?php
         $eventos_criados2 = Evento::find()
@@ -57,21 +45,30 @@ $this->params['breadcrumbs'][] = $this->title;
         //aqui sao os eventos a serem exibidos no calendario
         $eventos_visualizaveis2 = $eventos_criados2->union($eventos_inscricao_disciplina2)->union($eventos_professor_monitor_disciplina2)->all();
 
-        echo $form->field($NewModel, 'id_evento')->label('Evento',[])->widget(Select2::classname(), [
+        echo $form->field($NewModel, 'id_evento')->label('Pesquisar Evento',[])->widget(Select2::classname(), [
             'data' => ArrayHelper::map($eventos_visualizaveis2,'id_evento','nome'),
             'language' => 'pt',
-            'options' => ['placeholder' => 'Selecione Evento ... '],
+            'options' => ['placeholder' => 'Digite o nome ... '],
             'pluginOptions' => [
                 'allowClear' => true
             ],
         ]);
-
-        echo Html::submitButton('Acessar Evento', ['class' => 'btn btn-success']);
     ?>
+    <div class="row">
+        <div class="col-lg-11">
+            <?= Html::submitButton('Acessar Evento', ['class' => 'btn btn-success']); ?>
+            <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
+            </a>
+        </div>
+        <div class="col-lg-1">
+            <a>
+                <?= Html::a('Notificação', ['notificacao/ativar'], ['class' => 'btn btn-success']) ?>
+            </a>
+        </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 
-        <?= Html::a('Criar Evento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
      <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
