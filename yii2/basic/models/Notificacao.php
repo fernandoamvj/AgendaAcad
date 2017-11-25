@@ -30,7 +30,7 @@ class Notificacao extends \yii\db\ActiveRecord
         return [
             [['id_usuario', 'periodo_antecedencia'], 'required'],
             [['id_usuario'], 'integer'],
-            [['periodo_antecedencia'], 'string', 'max' => 20],
+            [['periodo_antecedencia'], 'safe'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'codigo']],
         ];
     }

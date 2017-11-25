@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
     <p>Avise-me a respeito de um evento antes do mesmo começar</p>
 
-    <?= $form->field($model, 'periodo_antecedencia')->dropDownList(['15 min' => '15 min antes', '30 min' => '30 min antes', '1 semana' => '1 semana antes',], ['prompt' => '---Selecione o período---']); ?>
+    <?= $form->field($model, 'periodo_antecedencia')->dropDownList(['00:15:00' => '15 min antes', '00:30:00' => '30 min antes', '168:00:00' => '1 semana antes',], ['prompt' => '---Selecione o período---']); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Ativar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

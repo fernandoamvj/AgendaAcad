@@ -60,9 +60,8 @@ class NotificacaoSearch extends Notificacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id_usuario' => $this->id_usuario,
+            'periodo_antecedencia' => $this->periodo_antecedencia, 
         ]);
-
-        $query->andFilterWhere(['like', 'periodo_antecedencia', $this->periodo_antecedencia]);
 
         return $dataProvider;
     }
