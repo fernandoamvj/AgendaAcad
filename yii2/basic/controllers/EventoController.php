@@ -145,33 +145,35 @@ class EventoController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->id_usuario=Yii::$app->user->getId();
 
-            $emails_professor = Usuario::find()
-                            ->select('email')
-                            ->from('usuario u')
-                            ->innerJoin('disciplina d','u.codigo = d.id_professor',[])
-                            ->where(['d.idDisciplina' => $model->idDisciplina]);
-            $emails_monitor = Usuario::find()
-                            ->select('email')
-                            ->from('usuario u')
-                            ->innerJoin('disciplina d','u.codigo = d.id_monitor',[])
-                            ->where(['d.idDisciplina' => $model->idDisciplina]);
-            $emails_aluno = Usuario::find()
-                            ->select('email')
-                            ->from('usuario u')
-                            ->innerJoin('inscricao i','u.codigo = i.id_usuario',[])
-                            ->where(['i.id_disciplina' => $model->idDisciplina]);
-
             if($model->idDisciplina != null) {
-                $emails = $emails_professor->union($emails_monitor)->union($emails_aluno)->all();
-
-                foreach ($emails as $email)
-                    Yii::$app->mailer->compose()
-                        ->setFrom('agendaacad17@gmail.com')
-                        ->setTo($email->email)
-                        ->setSubject('Criação do evento: ' . $model->nome)
-                        ->setTextBody("Informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "\nTipo: " . $model->tipo . "\nDescricao: " . $model->descricao)
-                        ->send();
+                $emails_professor = Usuario::find()
+                                ->select('email')
+                                ->from('usuario u')
+                                ->innerJoin('disciplina d','u.codigo = d.id_professor',[])
+                                ->where(['d.idDisciplina' => $model->idDisciplina]);
+                $emails_monitor = Usuario::find()
+                                ->select('email')
+                                ->from('usuario u')
+                                ->innerJoin('disciplina d','u.codigo = d.id_monitor',[])
+                                ->where(['d.idDisciplina' => $model->idDisciplina]);
+                $emails_aluno = Usuario::find()
+                                ->select('email')
+                                ->from('usuario u')
+                                ->innerJoin('inscricao i','u.codigo = i.id_usuario',[])
+                                ->where(['i.id_disciplina' => $model->idDisciplina]);
+                $emails = $emails_professor->union($emails_monitor)->union($emails_aluno)->all(); 
             }
+            else{
+                $emails = Usuario::find()->select('email')->from('usuario')->where(['codigo' => $model->id_usuario])->all();
+            }
+            foreach ($emails as $email)
+                Yii::$app->mailer->compose()
+                    ->setFrom('agendaacad17@gmail.com')
+                    ->setTo($email->email)
+                    ->setSubject('Criação do evento: ' . $model->nome)
+                    ->setTextBody("Informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "\nTipo: " . $model->tipo . "\nDescricao: " . $model->descricao)
+                    ->send();
+            
 
             $model->save();
             return $this->redirect(['index']);
@@ -194,32 +196,35 @@ class EventoController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $emails_professor1 = Usuario::find()
-                ->select('email')
-                ->from('usuario u')
-                ->innerJoin('disciplina d','u.codigo = d.id_professor',[])
-                ->where(['d.idDisciplina' => $model->idDisciplina]);
-            $emails_monitor1 = Usuario::find()
-                ->select('email')
-                ->from('usuario u')
-                ->innerJoin('disciplina d','u.codigo = d.id_monitor',[])
-                ->where(['d.idDisciplina' => $model->idDisciplina]);
-            $emails_aluno1 = Usuario::find()
-                ->select('email')
-                ->from('usuario u')
-                ->innerJoin('inscricao i','u.codigo = i.id_usuario',[])
-                ->where(['i.id_disciplina' => $model->idDisciplina]);
-
             if($model->idDisciplina != null) {
-                $emails1 = $emails_professor1->union($emails_monitor1)->union($emails_aluno1)->all();
+                $emails_professor = Usuario::find()
+                                ->select('email')
+                                ->from('usuario u')
+                                ->innerJoin('disciplina d','u.codigo = d.id_professor',[])
+                                ->where(['d.idDisciplina' => $model->idDisciplina]);
+                $emails_monitor = Usuario::find()
+                                ->select('email')
+                                ->from('usuario u')
+                                ->innerJoin('disciplina d','u.codigo = d.id_monitor',[])
+                                ->where(['d.idDisciplina' => $model->idDisciplina]);
+                $emails_aluno = Usuario::find()
+                                ->select('email')
+                                ->from('usuario u')
+                                ->innerJoin('inscricao i','u.codigo = i.id_usuario',[])
+                                ->where(['i.id_disciplina' => $model->idDisciplina]);
+                $emails = $emails_professor->union($emails_monitor)->union($emails_aluno)->all(); 
+            }
+            else{
+                $emails = Usuario::find()->select('email')->from('usuario')->where(['codigo' => $model->id_usuario])->all();
+            }
 
-                foreach ($emails1 as $email1)
-                    Yii::$app->mailer->compose()
-                        ->setFrom('agendaacad17@gmail.com')
-                        ->setTo($email1->email)
-                        ->setSubject('Alterações no evento: ' . $model->nome)
-                        ->setTextBody("Novas informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "\nTipo: " . $model->tipo . "\nDescricao: " . $model->descricao)
-                        ->send();
+            foreach ($emails as $email){
+                Yii::$app->mailer->compose()
+                    ->setFrom('agendaacad17@gmail.com')
+                    ->setTo($email->email)
+                    ->setSubject('Alterações no evento: ' . $model->nome)
+                    ->setTextBody("Novas informações: \nNome: " . $model->nome . "\nData: " . $model->data . "\nHora: " . $model->hora . "\nTipo: " . $model->tipo . "\nDescricao: " . $model->descricao)
+                    ->send();
             }
 
             $model->save();
