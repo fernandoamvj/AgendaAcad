@@ -64,7 +64,7 @@ class MailController extends Controller
 	            ->where(['disciplina.id_monitor' => $notificacao->id_usuario])
 	            ->orWhere(['disciplina.id_professor' => $notificacao->id_usuario]);
 
-	        //aqui sao os eventos a serem exibidos no calendario
+	        //aqui sao os eventos do calendario do usuario
 	        $eventos_visualizaveis = $eventos_criados->union($eventos_inscricao_disciplina)->union($eventos_professor_monitor_disciplina)->all();
 
 	        foreach($eventos_visualizaveis as $evento){
@@ -75,21 +75,20 @@ class MailController extends Controller
 		        	$diff = $dataEvento->diff($dataAtual);
 		        	echo $diff->format('%h:%i:%s'). "\n";
 		        	$minutos = $diff->i + ($diff->h*60) + ($diff->days * 24 * 60);
-		        	echo "Diferença em minutos ".$minutos."\n";
-		        	echo "Periodo de antecedencia ". $notificacao->periodo_antecedencia."\n";
-		        	if($minutos == $notificacao->periodo_antecedencia){
-	                    Yii::$app->mailer->compose()
+		        	$min = '00:'.$minutos.':00';
+		        	if($min == $notificacao->periodo_antecedencia){
+		        	    Yii::$app->mailer->compose()
 		                    ->setFrom('agendaacad17@gmail.com')
 		                    ->setTo($email->email)
-		                    ->setSubject('Criação do evento: ' . $evento->nome)
+		                    ->setSubject('Notificação do evento: ' . $evento->nome)
 		                    ->setTextBody("Informações: \nNome: " . $evento->nome . "\nData: " . $evento->data . "\nHora: " . $evento->hora . "\nTipo: " . $evento->tipo . "\nDescricao: " . $evento->descricao)
 		                    ->send();
+
+        				echo $message . "\n";
 		        	}
 		        }
 	        }
 
   		}
-
-        echo $message . "\n";
     }
 }
