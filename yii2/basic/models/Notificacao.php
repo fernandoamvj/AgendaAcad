@@ -42,7 +42,7 @@ class Notificacao extends \yii\db\ActiveRecord
     {
         return [
             'id_usuario' => 'Id Usuario',
-            'periodo_antecedencia' => 'Periodo Antecedencia',
+            'periodo_antecedencia' => 'Período de Antecedência',
         ];
     }
 

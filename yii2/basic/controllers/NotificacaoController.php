@@ -60,6 +60,13 @@ class NotificacaoController extends Controller
         ]);
     }
 
+    public function actionAtivar(){
+        $id = Yii::$app->user->getId();
+        if (($model = Notificacao::findOne($id)) !== null)
+            return $this->redirect(['update', 'id' => $model->id_usuario]);
+        else
+            return $this->redirect(['create']);
+    }
     /**
      * Creates a new Notificacao model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -70,7 +77,7 @@ class NotificacaoController extends Controller
         $model = new Notificacao();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id_usuario = Yii::$app->user->identity->codigo;
+            $model->id_usuario = Yii::$app->user->getId();
             $model->save();
             return $this->redirect(['evento/index']);
         //    return $this->redirect(['view', 'id' => $model->id_usuario]);

@@ -48,12 +48,12 @@ class InscricaoController extends Controller
                             ->select('inscricao.*')
                             ->from('inscricao ')
                             ->innerJoin('disciplina','inscricao.id_disciplina = disciplina.idDisciplina',[])
-                            ->where(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+                            ->where(['disciplina.id_professor' => Yii::$app->user->getId()]);
                 $dataProvider = new ActiveDataProvider([
                     'query' => $inscricoes,
                 ]);
             } else {                                         //n é
-                $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->identity->codigo]);
+                $dataProvider->query->filterWhere(['id_usuario' => Yii::$app->user->getId()]);
             }
         }else{
             $dataProvider->query->filterWhere(['id_usuario' => 0]);
@@ -97,7 +97,12 @@ class InscricaoController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             //se n é professor
             if(Yii::$app->user->identity->tipo!=2)
+<<<<<<< HEAD
                 $model->id_usuario = Yii::$app->user->identity->codigo;
+=======
+                $model->id_usuario = Yii::$app->user->getId();
+
+>>>>>>> d90ad5e83079c9e3cc9c59c0b86fbeb384374d3d
             $model->save();
             return $this->redirect(['index', 'id' => $model->codigo]);
         } else {

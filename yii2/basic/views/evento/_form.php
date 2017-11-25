@@ -33,8 +33,8 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'id_disciplina')->label('Disciplina',[])
         ->dropDownList(ArrayHelper::map(Disciplina::find()
-                            ->where(['id_professor' => Yii::$app->user->identity->codigo])
-                            ->orWhere(['id_monitor' => Yii::$app->user->identity->codigo])
+                            ->where(['id_professor' => Yii::$app->user->getId()])
+                            ->orWhere(['id_monitor' => Yii::$app->user->getId()])
                             ->all(),'idDisciplina','nome_disciplina'),['prompt'=>'Selecione Disciplina']
     ) ?>
 

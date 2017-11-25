@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $model->nome;
         if($model->idDisciplina == null)
             $exibir_botoes = true;
         else
-            if( Disciplina::findOne(['idDisciplina' => $model->id_disciplina])->id_monitor == Yii::$app->user->identity->codigo ||
-                Disciplina::findOne(['idDisciplina' => $model->id_disciplina])->id_professor == Yii::$app->user->identity->codigo) {
+            if( Disciplina::findOne(['idDisciplina' => $model->id_disciplina])->id_monitor == Yii::$app->user->getId() ||
+                Disciplina::findOne(['idDisciplina' => $model->id_disciplina])->id_professor == Yii::$app->user->getId()) {
 
                 $exibir_botoes = true;
             } else {

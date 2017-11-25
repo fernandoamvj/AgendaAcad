@@ -127,7 +127,7 @@ class SiteController extends Controller
       }
       if(Yii::$app->user->identity->tipo==2) 
         return $this->render('calendario');
-      if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->identity->codigo])->count() > 0)
+      if(Disciplina::find()->where(['id_monitor' => Yii::$app->user->getId()])->count() > 0)
               return $this->render('calendario3');
       return $this->render('calendario2');
     }

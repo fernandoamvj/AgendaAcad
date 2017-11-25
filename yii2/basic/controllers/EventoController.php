@@ -54,18 +54,18 @@ class EventoController extends Controller
             $eventos_criados = Evento::find()
                 ->select('evento.*')
                 ->from('evento')
-                ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+                ->where(['evento.id_usuario' => Yii::$app->user->getId()]);
             $eventos_inscricao_disciplina = Evento::find()
                 ->select('evento.*')
                 ->from('inscricao')
                 ->innerJoin('evento', 'inscricao.id_disciplina = evento.id_disciplina', [])
-                ->where(['inscricao.id_usuario' => Yii::$app->user->identity->codigo]);
+                ->where(['inscricao.id_usuario' => Yii::$app->user->getId()]);
             $eventos_professor_monitor_disciplina = Evento::find()
                 ->select('evento.*')
                 ->from('disciplina')
                 ->innerJoin('evento', 'disciplina.idDisciplina = evento.id_disciplina', [])
-                ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
-                ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+                ->where(['disciplina.id_monitor' => Yii::$app->user->getId()])
+                ->orWhere(['disciplina.id_professor' => Yii::$app->user->getId()]);
 
             //aqui sao os eventos a serem exibidos no calendario
             $eventos_visualizaveis = $eventos_criados->union($eventos_inscricao_disciplina)->union($eventos_professor_monitor_disciplina)->all();
@@ -76,7 +76,7 @@ class EventoController extends Controller
                 $Event->title = $evento->nome;
                 $Event->start = date($evento->data);
                 $Event->url = 'http://localhost/AgendaAcad/yii2/basic/web/index.php?r=evento%2Fview&id=' . $evento->id_evento;
-                if ($evento->id_usuario == Yii::$app->user->identity->codigo)
+                if ($evento->id_usuario == Yii::$app->user->getId())
                     $Event->color = 'yellow';
                 else
                     $Event->color = 'blue';
@@ -89,13 +89,13 @@ class EventoController extends Controller
                 $eventos_criados2 = Evento::find()
                     ->select('evento.*')
                     ->from('evento')
-                    ->where(['evento.id_usuario' => Yii::$app->user->identity->codigo]);
+                    ->where(['evento.id_usuario' => Yii::$app->user->getId()]);
                 $eventos_professor_monitor_disciplina2 = Evento::find()
                     ->select('evento.*')
                     ->from('disciplina')
                     ->innerJoin('evento', 'disciplina.idDisciplina = evento.id_disciplina', [])
-                    ->where(['disciplina.id_monitor' => Yii::$app->user->identity->codigo])
-                    ->orWhere(['disciplina.id_professor' => Yii::$app->user->identity->codigo]);
+                    ->where(['disciplina.id_monitor' => Yii::$app->user->getId()])
+                    ->orWhere(['disciplina.id_professor' => Yii::$app->user->getId()]);
 
                 //aqui sao os eventos a serem exibidos na lista logo abaixo, eles podem ser editados
                 $eventos_editaveis = $eventos_criados2;
@@ -143,7 +143,7 @@ class EventoController extends Controller
         $model = new Evento();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id_usuario=Yii::$app->user->identity->codigo;
+            $model->id_usuario=Yii::$app->user->getId();
 
             $emails_professor = Usuario::find()
                             ->select('email')
@@ -264,7 +264,7 @@ class EventoController extends Controller
     {
         $ids_evento = Evento::find()
                 ->select('id_evento')
-                ->where(['id_usuario' => Yii::$app->user->identity->codigo])
+                ->where(['id_usuario' => Yii::$app->user->getId()])
                 ->asArray()
                 ->all();
 

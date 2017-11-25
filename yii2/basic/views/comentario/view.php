@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $model->id_comentario;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php
-        if( $model->id_usuario == Yii::$app->user->identity->codigo){
+        if( $model->id_usuario == Yii::$app->user->getId()){
             $exibir_botoes = true;
         } else {
             $exibir_botoes = false;
