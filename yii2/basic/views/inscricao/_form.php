@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Disciplina;
+use app\models\Semestre;
 use kartik\select2\Select2;
 use app\models\Usuario;
 
@@ -57,7 +58,14 @@ use app\models\Usuario;
             ],
         ]);
     }
-     echo $form->field($model, 'id_semestre')->textInput() 
+     echo $form->field($model, 'id_semestre')->label('Semestre',[])->widget(Select2::classname(), [
+         'data' => ArrayHelper::map(Semestre::find()->all(),'id_semestre','nome'),
+         'language' => 'pt',
+         'options' => ['placeholder' => 'Digite o semestre ... '],
+         'pluginOptions' => [
+             'allowClear' => true
+         ],
+     ]);
     ?>
 
 

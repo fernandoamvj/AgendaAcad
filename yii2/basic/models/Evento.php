@@ -36,7 +36,7 @@ class Evento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data', 'hora', 'descricao', 'id_usuario', 'nome', 'tipo'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
+            [['data', 'id_usuario', 'nome'], 'required', 'message' => 'Esse espaço deve ser preenchido '],
             [['data', 'hora'], 'safe'],
             [['id_disciplina', 'id_usuario'], 'integer'],
             [['descricao'], 'string', 'max' => 300],
