@@ -62,8 +62,8 @@ class NotificacaoController extends Controller
 
     public function actionAtivar(){
         $id = Yii::$app->user->getId();
-        if (($model = Notificacao::findOne($id)) !== null)
-            return $this->redirect(['update', 'id' => $model->id_usuario]);
+        if (($model = Notificacao::findOne(['id_usuario' => $id])) !== null)
+            return $this->redirect(['update', 'id' => $model->id_notificacao]);
         else
             return $this->redirect(['create']);
     }

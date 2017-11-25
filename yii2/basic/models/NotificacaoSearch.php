@@ -18,7 +18,7 @@ class NotificacaoSearch extends Notificacao
     public function rules()
     {
         return [
-            [['id_usuario'], 'integer'],
+            [['id_notificacao', 'id_usuario'], 'integer'],
             [['periodo_antecedencia'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class NotificacaoSearch extends Notificacao
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id_notificacao' => $this->id_notificacao,
             'id_usuario' => $this->id_usuario,
             'periodo_antecedencia' => $this->periodo_antecedencia, 
         ]);
