@@ -38,6 +38,10 @@ class NotificacaoController extends Controller
         $searchModel = new NotificacaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if($dataProvider->totalCount <= 0){
+            return $this->actionCreate();
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -69,6 +73,7 @@ class NotificacaoController extends Controller
             $model->id_usuario = Yii::$app->user->identity->codigo;
             $model->save();
             return $this->redirect(['evento/index']);
+        //    return $this->redirect(['view', 'id' => $model->id_usuario]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -87,7 +92,7 @@ class NotificacaoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_notificacao]);
+            return $this->redirect(['evento/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

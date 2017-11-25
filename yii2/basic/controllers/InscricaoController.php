@@ -98,7 +98,6 @@ class InscricaoController extends Controller
             //se n é professor
             if(Yii::$app->user->identity->tipo!=2)
                 $model->id_usuario = Yii::$app->user->identity->codigo;
-
             $model->save();
             return $this->redirect(['index', 'id' => $model->codigo]);
         } else {

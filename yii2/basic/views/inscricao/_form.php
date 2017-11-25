@@ -57,6 +57,7 @@ use app\models\Usuario;
             ],
         ]);
     }
+     echo $form->field($model, 'id_semestre')->textInput() 
     ?>
 
 

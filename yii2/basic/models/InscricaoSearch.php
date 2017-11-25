@@ -63,6 +63,7 @@ class InscricaoSearch extends Inscricao
             'codigo' => $this->codigo,
             'id_usuario' => $this->id_usuario,
             'id_disciplina' => $this->id_disciplina,
+            'id_semestre' => $this->id_semestre,
         ]);
 
         $query->andFilterWhere(['like', 'disciplina.nome_disciplina', $this->id_disciplina
