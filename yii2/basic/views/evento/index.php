@@ -91,35 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
         });
     </script>
 
-    <h1><?= Html::encode($title2) ?></h1>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            //'id_evento',
-
-            'nome',
-            'descricao',
-            'data',
-            'hora',
-
-            [
-                'label' => 'Disciplina',
-                'attribute'=>'id_disciplina',
-                'value'=>'idDisciplina.nome_disciplina'
-            ],
-            [
-                'label' => 'Criador',
-                'attribute'=>'idUsuario.nome',
-            ],
-            
-            //'tipo',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 
     <br>
     <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [

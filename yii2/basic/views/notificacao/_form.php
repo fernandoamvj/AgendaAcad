@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'periodo_antecedencia')->dropDownList(['00:15:00' => '15 min antes', '00:30:00' => '30 min antes', '168:00:00' => '1 semana antes',], ['prompt' => '---Selecione o período---']); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Ativar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Ativar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
