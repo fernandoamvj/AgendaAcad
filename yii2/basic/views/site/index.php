@@ -15,16 +15,24 @@ $this->title = 'AgendaAcad';
         <!--  Html::img('@app/Images/logoAgendaAcad.png', ['alt' => 'logo'])
         <!-- <h1>Agenda Acad</h1> -->
 
-        <div class=" col-md-12">
+        <div class=" col-md-12 " style="align-items: center;">
             <p class="lead">Aqui voce poderá ver todos os seus compromissos e agendamentos do CEFET!</p>
 
                 <?php
-                    if(!Yii::$app->user->isGuest)
+                    if(!Yii::$app->user->isGuest){
                         echo Html::a('Meu Calendário', ['evento/index'], ['class' => 'btn btn-lg btn-success']);
-                    else
-                        echo Html::a('Meu Calendário', ['login'], ['class' => 'btn btn-lg btn-success']);
+                    }
+                    else{
+                        echo Html::a(' Login ', ['login'], ['class' => 'btn btn-lg btn-success']);
+                        printf( "       ");
+                        echo Html::a('Cadastre-se', ['usuario/create'], ['class' => 'btn btn-lg btn-success']);
+                    }
                 ?>
-                <?= Html::a('Tutorial', 'http://www.youtube.com', ['class' => 'btn btn-lg btn-success']) ?>
+                <br/><br/>
+                
+                <a href="http://www.youtube.com" target="_blank" class="btn btn-lg btn-success">Tutorial</a>
+                
+
             </p>
         </div>
 
