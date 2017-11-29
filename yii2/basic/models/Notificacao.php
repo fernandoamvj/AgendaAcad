@@ -28,8 +28,8 @@ class Notificacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_notificacao', 'id_usuario', 'periodo_antecedencia'], 'required'],
-            [['id_notificacao', 'id_usuario'], 'integer'],
+            [['id_usuario', 'periodo_antecedencia'], 'required'],
+            [['id_usuario'], 'integer'],
             [['periodo_antecedencia'], 'safe'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'codigo']],
         ];

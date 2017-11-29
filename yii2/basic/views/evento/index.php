@@ -91,7 +91,11 @@ $this->params['breadcrumbs'][] = $this->title;
         });
     </script>
 
-
+    <br>
+    <?= Html::a('Exportar para Google Agenda', ['export', 'eventos'=>$events], [
+        'class' => 'btn btn-primary',
+    ]) ?>
+    <br>
 
     <br>
     <?= Html::a('Remover Eventos Cadastrados', ['excluireventos'], [
