@@ -30,7 +30,7 @@ $this->title = 'AgendaAcad';
                 ?>
                 <br/><br/>
                 
-                <a href="http://www.youtube.com" target="_blank" class="btn btn-lg btn-success">Tutorial</a>
+                <a href="https://www.youtube.com/watch?v=fU3sTY7SMZ0&list=PLrjCNpuhDj6cGYMDm_Pr1LPmYclVhIJCM" target="_blank" class="btn btn-lg btn-success">Tutorial</a>
                 
 
             </p>
